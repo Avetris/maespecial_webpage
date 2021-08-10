@@ -1,0 +1,4 @@
+<div class="landing_page" [@changePage]="hasEnter ? 'closed' : 'open'">
+    <button mat-raised-button *ngIf="hasEnter == false" color="primary" class="landing_btn" (click)="enter()">Enter</button>
+    <img class="landing_image" src="/assets/img/landing.jpg">
+</div>
