@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {
   trigger,
   state,
@@ -17,10 +17,10 @@ import {
         height: '100%',
       })),
       state('closed', style({
-        height: '20%',
+        height: '30%',
       })),
       transition('open => closed', [
-        animate('0.4s')
+        animate('1s')
       ])
     ]),
   ],
