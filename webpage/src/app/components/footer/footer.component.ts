@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  @Input() hasEnter = false;
+  
   discordLink = "https://www.google.es";
   twitterLink = "https://www.youtube.es";
   instagramLink = "#";
@@ -14,6 +16,7 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.hasEnter);
   }
 
 }

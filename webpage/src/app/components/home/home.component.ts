@@ -1,34 +1,10 @@
-import { Component} from '@angular/core';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from '@angular/animations';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  animations: [
-    trigger('changePage', [
-      state('open', style({
-        height: '100%',
-      })),
-      state('closed', style({
-        height: '30%',
-      })),
-      transition('open => closed', [
-        animate('1s')
-      ])
-    ]),
-  ],
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  hasEnter = false;
 
-  enter() {
-    this.hasEnter = true;
-  }
 }

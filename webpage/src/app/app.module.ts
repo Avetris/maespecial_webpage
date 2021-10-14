@@ -36,7 +36,7 @@ import { SlideComponent } from './components/animations/slide/slide.component';
     HeaderComponent,
     ParallaxComponent,
     FadeComponent,
-    SlideComponent
+    SlideComponent,
   ],
   imports: [
     BrowserModule,
