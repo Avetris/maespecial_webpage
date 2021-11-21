@@ -1,0 +1,8 @@
+.nav-link.active {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+.header-paint {
+	background-color: cadetblue !important
+}

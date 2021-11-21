@@ -1,0 +1,40 @@
+[
+    {
+        "routeName": "/home",
+        "textName": "menus.home"
+    },
+    {
+        "routeName": "/about",
+        "textName": "menus.about"
+    },
+    {
+        "textName": "menus.dropdown",
+        "children": [
+            {
+                "routeName": "/about",
+                "textName": "menus.courses"
+            },
+            {
+                "routeName": "/about",
+                "textName": "menus.courses"
+            },
+            {
+                "routeName": "/about",
+                "textName": "menus.portfolio"
+            }
+        ]
+    },
+    {
+        "textName": "menus.dropdown2",
+        "children": [
+            {
+                "routeName": "/contact",
+                "textName": "menus.contact"
+            },
+            {
+                "routeName": "/login",
+                "textName": "menus.login"
+            }
+        ]
+    }
+]

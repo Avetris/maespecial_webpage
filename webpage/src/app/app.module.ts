@@ -1,57 +1,56 @@
+import { FooterModule } from './@core/components/footer/footer.module';
+import { HeaderModule } from './@core/components/header/header.module';
+import { NavbarModule } from './@core/components/navbar/navbar.module';
+import { AppRoutingModule } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
+import { CookieLawModule } from 'angular2-cookie-law';
+import { Mugan86GoogleAnalyticsModule } from 'mugan86-ng-google-analytics';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { AppComponent } from './app.component';
+import { YoutubePipe } from './@core/pipes/youtube.pipe';
+import { DomSecurePipe } from './@core/pipes/dom-secure.pipe';
+import { SidebarModule } from './@core/components/sidebar/sidebar.module';
 import { NgModule } from '@angular/core';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatCardModule} from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FooterComponent } from './components/footer/footer.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ListGamesComponent } from './components/games-components/list-games/list-games.component';
-import { AboutComponent } from './components/about/about.component'; 
-import { MatListModule } from '@angular/material/list';
-import { GameComponent } from './components/games-components/game/game.component';
-import { GamesService } from './services/games.service';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './components/home/home.component';
-import { HeaderComponent } from './components/header/header.component';
-import { ParallaxComponent } from './components/animations/parallax/parallax.component';
-import { FadeComponent } from './components/animations/fade/fade.component';
-import { SlideComponent } from './components/animations/slide/slide.component';
+import { TranslateCustomModule } from './@core/modules/translate-custom.module';
 
+const COMPONENTS = [
+  AppComponent
+];
+
+const PIPES = [
+  YoutubePipe,
+  DomSecurePipe
+];
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooterComponent,
-    ListGamesComponent,
-    AboutComponent,
-    GameComponent,
-    HomeComponent,
-    HeaderComponent,
-    ParallaxComponent,
-    FadeComponent,
-    SlideComponent
+    COMPONENTS,
+    PIPES
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    NgbModule,
     AppRoutingModule,
+    NavbarModule,
+    HeaderModule,
+    FooterModule,
+    SidebarModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatButtonModule,
-    FlexLayoutModule,
-    FontAwesomeModule,
-    MatListModule
+    CookieLawModule,
+    Mugan86GoogleAnalyticsModule.forRoot(
+      {
+        analyticsId: 'UA-57700600-14', // Add your track id
+        showLog: false
+      }
+    ),
+    HttpClientModule,
+    TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
+
   ],
-  providers: [GamesService],
+  exports: [ TranslateCustomModule ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
