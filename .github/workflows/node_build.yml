@@ -36,12 +36,15 @@ jobs:
           git config user.name "Automatic Build"
           git config user.email noreply@github.com
 
+      - name: Remove File and Copy File to Root
+        run: |    
+          find . -mindepth 1       
+          
       - name: Commit build data
         id: make-commit
         run: |
           git rm -r *
           cp ../temp .
-          ls
           git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
