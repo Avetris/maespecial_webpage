@@ -42,6 +42,7 @@ jobs:
         id: make-commit
         run: |
           git rm -r *
+          find . -mindepth 1 -regextype egrep ! -regex '^./(.git)(\/.*)?' -delete # remove files
           cp -R ../temp .
           git add *
           git commit --message "Prepare release"
