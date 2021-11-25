@@ -4,7 +4,6 @@ import { NavbarModule } from './@core/components/navbar/navbar.module';
 import { AppRoutingModule } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { CookieLawModule } from 'angular2-cookie-law';
-import { Mugan86GoogleAnalyticsModule } from 'mugan86-ng-google-analytics';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -39,12 +38,6 @@ const PIPES = [
     SidebarModule,
     BrowserAnimationsModule,
     CookieLawModule,
-    Mugan86GoogleAnalyticsModule.forRoot(
-      {
-        analyticsId: 'UA-57700600-14', // Add your track id
-        showLog: false
-      }
-    ),
     HttpClientModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
 
