@@ -29,8 +29,8 @@ jobs:
 
       - name: Create release branch
         run: |
-          git fetch
-          git checkout -b release origin/release
+          git fetch --all
+          git checkout release
 
       - name: Initialize mandatory git config
         run: |
@@ -40,6 +40,7 @@ jobs:
       - name: Commit build data
         id: make-commit
         run: |
+          git rm -r *
           cp -R ../temp .
           git add *
           git commit --message "Prepare release"
