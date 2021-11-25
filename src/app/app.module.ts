@@ -2,9 +2,7 @@ import { FooterModule } from './@core/components/footer/footer.module';
 import { HeaderModule } from './@core/components/header/header.module';
 import { NavbarModule } from './@core/components/navbar/navbar.module';
 import { AppRoutingModule } from './app.routes';
-import { BrowserModule } from '@angular/platform-browser';
 import { CookieLawModule } from 'angular2-cookie-law';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { YoutubePipe } from './@core/pipes/youtube.pipe';
@@ -30,13 +28,11 @@ const PIPES = [
     PIPES
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     NavbarModule,
     HeaderModule,
     FooterModule,
     SidebarModule,
-    BrowserAnimationsModule,
     CookieLawModule,
     HttpClientModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
