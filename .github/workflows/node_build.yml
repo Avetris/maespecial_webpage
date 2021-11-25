@@ -39,20 +39,14 @@ jobs:
 
       - name: Remove File
         run: |    
-          find . -mindepth 1 ! -regex '^./build\(/.*\)?' -delete
+          find . -mindepth 1 ! -regex '^./build\(/.*\)?' -delete # remove files
+          
+      - name: Copy File to Root
+        run: |    
+          cp build/* .          
+          find . -mindepth 1 ! -regex '^./build\(/.*\)?' -delete # remove files
+          rm build
           find . -mindepth 1
-
-      - name: List files
-        uses: batista/lint-filenames@v1
-        continue-on-error: true
-        with:
-          path: './build'
-
-      - name: List files
-        uses: batista/lint-filenames@v1
-        continue-on-error: true
-        with:
-          path: '.'
           
       - name: Commit build data
         id: make-commit
