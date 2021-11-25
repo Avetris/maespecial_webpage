@@ -25,12 +25,22 @@ jobs:
       - name: Install dependencies
         run: npm ci    
       - run: npm run build --if-present    
+
+      - name: List files
+        uses: batista/lint-filenames@v1        
+        with:
+          path: '.'
       
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2        
         
       - name: Create release branch
         run: git checkout -b release/v${{ github.event.inputs.versionName }}
+        
+      - name: List files
+        uses: batista/lint-filenames@v1        
+        with:
+          path: '.'
 
       - name: Commit build data
         id: make-commit
