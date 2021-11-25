@@ -41,6 +41,7 @@ jobs:
         run: |
           git rm -r *
           cp ../temp .
+          ls
           git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
