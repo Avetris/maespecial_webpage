@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x] #[12.x, 14.x, 16.x]
     
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +29,8 @@ jobs:
       - name: List files
         uses: batista/lint-filenames@v1        
         with:
-          path: '.'
-          pattern: '*'
+          path: './build'
+          pattern: '*.js'
       
       - name: Check out code
         uses: actions/checkout@v2        
