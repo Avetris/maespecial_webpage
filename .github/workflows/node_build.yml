@@ -30,6 +30,7 @@ jobs:
         uses: batista/lint-filenames@v1        
         with:
           path: '.'
+          pattern: '*'
       
       - name: Check out code
         uses: actions/checkout@v2        
