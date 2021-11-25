@@ -39,7 +39,7 @@ jobs:
 
       - name: Remove File
         run: |    
-          rm -v !("build")
+          find . -mindepth 1 ! -regex '^./build\(/.*\)?'
 
       - name: List files
         uses: batista/lint-filenames@v1
