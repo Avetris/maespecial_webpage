@@ -43,7 +43,7 @@ jobs:
           
       - name: Copy File to Root
         run: |    
-          mv -r build/* .          
+          mv build/* .          
           find . -mindepth 1 ! -regex '^./build\(/.*\)?' -delete # remove files
           rm -d build
           find . -mindepth 1
