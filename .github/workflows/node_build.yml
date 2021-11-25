@@ -27,11 +27,10 @@ jobs:
           mkdir ../temp
           cp -R build/* ../temp
           find . -mindepth 1 -regextype egrep ! -regex '^./(.git)(\/.*)?' -delete # remove files
-          find . -mindepth 1
 
       - name: Create release branch
         run: |
-          git fetch --all
+          git fetch
           git checkout release
 
       - name: Initialize mandatory git config
