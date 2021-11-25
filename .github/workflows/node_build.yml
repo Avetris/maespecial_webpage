@@ -37,19 +37,16 @@ jobs:
       - name: Create release branch
         run: git checkout -b release
 
-      - name: Remove File
+      - name: Remove File and Copy File to Root
         run: |    
           find . -mindepth 1 -regextype egrep ! -regex '^./(build|.git)(\/.*)?' -delete # remove files
-          find . -mindepth 1
-          
-      - name: Copy File to Root
-        run: |    
           mv build/* .          
           find . -mindepth 1
           
       - name: Commit build data
         id: make-commit
         run: |
+          git rm -r *
           git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
