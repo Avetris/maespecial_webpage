@@ -18,32 +18,30 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}        
       
-      - name: Check out code
-        uses: actions/checkout@v2    
-
-      - name: Initialize mandatory git config
-        run: |
-          git config user.name "Automatic Build"
-          git config user.email noreply@github.com
-
       - name: Install dependencies
         run: npm ci    
       - run: npm run build --if-present   
 
       - name: Remove File and Copy File to Root
         run: |    
-          pwd
-          find . -mindepth 1 -regextype egrep ! -regex '^./(build|.git)(\/.*)?' -delete # remove files
-          mv build/* .          
-          find . -mindepth 1           
+          mkdir ../temp
+          cp -R build/* ../temp
+          cp -R .git ../temp          
              
       - name: Create release branch
         run: git checkout -b release
+
+      - name: Initialize mandatory git config
+        run: |
+          git config user.name "Automatic Build"
+          git config user.email noreply@github.com
 
       - name: Commit build data
         id: make-commit
         run: |
           git rm -r *
+          cp ../temp .
+          git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
