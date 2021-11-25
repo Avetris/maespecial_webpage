@@ -25,8 +25,9 @@ jobs:
       - name: Remove File and Copy File to Root
         run: |    
           mkdir ../temp
-          cp -R build/* ../temp     
-          rm -rf build 
+          cp -R build/* ../temp
+          find . -mindepth 1 -regextype egrep ! -regex '^./(.git)(\/.*)?' -delete # remove files
+          find . -mindepth 1
 
       - name: Create release branch
         run: |
@@ -37,18 +38,12 @@ jobs:
         run: |
           git config user.name "Automatic Build"
           git config user.email noreply@github.com 
-          
-      - name: Remove all files
-        run: |    
-            find . -mindepth 1 -regextype egrep ! -regex '^./(.git)(\/.*)?' -delete # remove files
-            find . -mindepth 1
-
 
       - name: Commit build data
         id: make-commit
         run: |
           git rm -r *
-          cp -R ../temp .
+          cp -R ../temp/* .
           git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
