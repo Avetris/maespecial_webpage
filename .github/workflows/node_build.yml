@@ -40,7 +40,7 @@ jobs:
       - name: Commit build data
         id: make-commit
         run: |
-          cp ../temp .
+          cp -R ../temp .
           git add *
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
