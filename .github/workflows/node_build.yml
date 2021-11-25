@@ -27,7 +27,8 @@ jobs:
       - run: npm run build --if-present    
 
       - name: List files
-        uses: batista/lint-filenames@v1        
+        uses: batista/lint-filenames@v1
+        continue-on-error: true
         with:
           path: './build'
       
@@ -38,9 +39,10 @@ jobs:
         run: git checkout -b release/v${{ github.event.inputs.versionName }}
         
       - name: List files
-        uses: batista/lint-filenames@v1        
+        uses: batista/lint-filenames@v1
+        continue-on-error: true
         with:
-          path: '.'
+          path: './build'
 
       - name: Commit build data
         id: make-commit
