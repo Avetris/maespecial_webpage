@@ -39,12 +39,11 @@ jobs:
 
       - name: Remove File
         run: |    
-          find . -mindepth 1 ! -regex '^./build\(/.*\)?' -delete # remove files
+          find . -mindepth 1 ! -regex '^./(build|.git)\(/.*\)?' -delete # remove files
           
       - name: Copy File to Root
         run: |    
           mv build/* .          
-          find . -mindepth 1 ! -regex '^./(build|.git)\(/.*\)?' -delete # remove files
           find . -mindepth 1
           
       - name: Commit build data
