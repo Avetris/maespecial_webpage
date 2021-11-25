@@ -39,7 +39,7 @@ jobs:
 
       - name: Remove File
         run: |    
-          find . -mindepth 1 ! -regex '^.\/(build|.git)(\/.*)?' -delete # remove files
+          find . -mindepth 1 -regextype egrep ! -regex '^./(build|.git)(\/.*)?' -delete # remove files
           find . -mindepth 1
           
       - name: Copy File to Root
