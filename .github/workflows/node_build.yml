@@ -25,8 +25,7 @@ jobs:
       - name: Remove File and Copy File to Root
         run: |    
           mkdir ../temp
-          cp -R build/* ../temp
-          cp -R .git ../temp          
+          cp -R build/* ../temp      
              
       - name: List pre files
         run: |    
