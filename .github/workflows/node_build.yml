@@ -25,7 +25,8 @@ jobs:
       - name: Remove File and Copy File to Root
         run: |    
           mkdir ../temp
-          cp -R build/* ../temp      
+          cp -R build/* ../temp     
+          rm -rf build 
 
       - name: Create release branch
         run: |
