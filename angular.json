@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "blog-angular": {
+    "maespecial": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -57,18 +57,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "blog-angular:build"
+            "browserTarget": "maespecial:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "blog-angular:build:production"
+              "browserTarget": "maespecial:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "blog-angular:build"
+            "browserTarget": "maespecial:build"
           }
         },
         "test": {
@@ -103,5 +103,5 @@
       }
     }
   },
-  "defaultProject": "blog-angular"
+  "defaultProject": "maespecial"
 }

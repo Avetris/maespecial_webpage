@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'blog-angular';
+  title = 'maespecial';
 
   constructor() {
     // Floating label headings for the contact form
