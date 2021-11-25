@@ -28,7 +28,9 @@ jobs:
           cp -R build/* ../temp      
 
       - name: Create release branch
-        run: git checkout -b release
+        run: |
+        git fetch
+        git checkout -b release
 
       - name: Initialize mandatory git config
         run: |
