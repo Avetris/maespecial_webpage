@@ -28,6 +28,13 @@ export const ABOUT: Header =
     bg: './assets/img/home-bg.jpg'
 };
 
+export const PRIVACY_POLICY: Header =
+{
+    title: 'privacyPolicy.title',
+    button: 'buttons.readMore',
+    bg: './assets/img/home-bg.jpg'
+};
+
 export const COURSES: Header =
 {
     title: 'courses.title',

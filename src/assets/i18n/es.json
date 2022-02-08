@@ -36,5 +36,9 @@
         "title": "Portfolio",
         "description": "Lista de los trabajos que he realizado"
     },
-    "showMoreArticles": "Mostrar más artículos"
+    "showMoreArticles": "Mostrar más artículos",
+    "privacyPolicy": {
+        "footer": "Política de Privacidad",
+        "title": "Política de Privacidad"
+    }
 }

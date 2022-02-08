@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
   currentYear: number = new Date().getFullYear();
-  author = 'Anartz Mugika Ledo';
+  author = 'Quantvm Fate';
 
   sharedElements: SharedElement[] = [
-    {
+    /*{
       url: 'https://twitter.com/',
       path: 'mugan86',
       icon: 'fab fa-twitter'
@@ -35,6 +35,11 @@ export class FooterComponent {
       url: 'https://npmjs.com/',
       path: '~mugan86',
       icon: 'fab fa-npm'
+    }*/
+    {
+      url: 'https://www.instagram.com/',
+      path: 'maespecial07',
+      icon: 'fab fa-instagram'
     }
   ];
 }

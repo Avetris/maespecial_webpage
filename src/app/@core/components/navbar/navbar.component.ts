@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('/assets/pages_info.json').subscribe( (pagesInfo: PageInfo[]) => {
-      console.log(pagesInfo);
+      // console.log(pagesInfo);
       this.pagesInfo = pagesInfo;
     });
   }
