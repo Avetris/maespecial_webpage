@@ -1,17 +1,20 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
+import { ResourcesModule } from './@pages/resources/resources.module';
 
 const APP_ROUTES: Routes = [
     { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(m => m.HomeModule)},
-    { path: 'about', loadChildren: () => import('./@pages/about/about.module').then(m => m.AboutModule)} ,
-    { path: 'privacy-policy', loadChildren: () => import('./@pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule)} ,
-/*    { path: 'post', loadChildren: () => import('./@pages/post/post.module').then(m => m.PostModule)},
-    { path: 'portfolio', loadChildren: () => import('./@pages/portfolio/portfolio.module').then(m => m.PortfolioModule)},
+    { path: 'resources', children: [
+        { path: '', loadChildren: () => import('./@pages/resources/resources.module').then(m => m.ResourcesModule)},         
+        { path: 'companions', loadChildren: () => import('./@pages/resources/element/resources-element.module').then(m => m.ResourcesElementModule)},
+        { path: 'theories', loadChildren: () => import('./@pages/resources/element/resources-element.module').then(m => m.ResourcesElementModule)},
+        { path: 'commercials', loadChildren: () => import('./@pages/resources/element/resources-element.module').then(m => m.ResourcesElementModule)},
+        { path: 'ownCreation', loadChildren: () => import('./@pages/resources/element/resources-element.module').then(m => m.ResourcesElementModule)},    
+    ]},
+    { path: 'diary', loadChildren: () => import('./@pages/portfolio/portfolio.module').then(m => m.PortfolioModule)},
     { path: 'contact', loadChildren: () => import('./@pages/contact/contact.module').then(m => m.ContactModule)},
-    { path: 'login', loadChildren: () => import('./@pages/account/login/login.module').then(m => m.LoginModule)},
-    { path: 'register', loadChildren: () => import('./@pages/account/register/register.module').then(m => m.RegisterModule)},
-    { path: 'courses', loadChildren: () => import('./@pages/courses/courses.module').then(m => m.CoursesModule)},*/
+    { path: 'privacy-policy', loadChildren: () => import('./@pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule)},
     { path: '**', pathMatch: 'full' , redirectTo: 'home' },
 ];
 
-export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES, { useHash: true});
+export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES, { useHash: true, scrollPositionRestoration: 'enabled'});

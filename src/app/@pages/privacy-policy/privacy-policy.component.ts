@@ -14,8 +14,6 @@ export class PrivacyPolicyComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.config.updatebgUrlSubject(PRIVACY_POLICY.bg);
-    this.config.updateTitleSubject(PRIVACY_POLICY.title);
-    this.config.updateButtonTitleSubject(PRIVACY_POLICY.button);
+    this.config.updateDataSubject(PRIVACY_POLICY);
   }
 }

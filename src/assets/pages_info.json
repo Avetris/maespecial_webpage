@@ -1,40 +1,35 @@
 [
     {
         "routeName": "/home",
-        "textName": "menus.home"
+        "textName": "home.menu"
     },
     {
-        "routeName": "/about",
-        "textName": "menus.about"
-    },
-    {
-        "textName": "menus.dropdown",
+        "textName": "resources.menu.name",
         "children": [
             {
-                "routeName": "/about",
-                "textName": "menus.courses"
+                "routeName": "/resources/companions",
+                "textName": "resources.menu.companions"
             },
             {
-                "routeName": "/about",
-                "textName": "menus.courses"
+                "routeName": "/resources/theories",
+                "textName": "resources.menu.theories"
             },
             {
-                "routeName": "/about",
-                "textName": "menus.portfolio"
+                "routeName": "/resources/commercials",
+                "textName": "resources.menu.commercials"
+            },
+            {
+                "routeName": "/resources/ownCreation",
+                "textName": "resources.menu.ownCreation"
             }
         ]
     },
     {
-        "textName": "menus.dropdown2",
-        "children": [
-            {
-                "routeName": "/contact",
-                "textName": "menus.contact"
-            },
-            {
-                "routeName": "/login",
-                "textName": "menus.login"
-            }
-        ]
+        "routeName": "/diary",
+        "textName": "diary.menu"
+    },
+    {
+        "routeName": "/contact",
+        "textName": "contact.menu"
     }
 ]

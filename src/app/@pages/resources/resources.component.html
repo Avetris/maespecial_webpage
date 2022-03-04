@@ -1,0 +1,16 @@
+<div class="row">
+  <ng-container *ngFor="let res of resourcesTypes; index as i">
+    <div class="col-lg-3 resource-item">
+      <div class="card h-100">
+        <a><blog-poster-image [classValues]="'card-img-top'" [src]="res.image"></blog-poster-image></a>
+        <div class="card-body d-flex flex-column">
+          <h4 class="card-title">
+            <a>{{ res.name | translate }}</a>
+          </h4>
+          <p class="card-text mt-auto">{{ res.description | translate }}</p>
+          <a [routerLink]="res.route" class="nav-link btn btn-info mt-auto">{{ "general.show" | translate }} {{ res.name | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  </div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { PageInfo } from '../models/PageInfo';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { PageInfo } from 'src/app/models/PageInfo';
+import { ConfigService } from '../../services/config.service';
+import { DataService } from '../../services/data.service';
   // Declaramos las variables para jQuery
   declare var $: any;
 @Component({
@@ -11,23 +12,37 @@ import { PageInfo } from '../models/PageInfo';
 export class NavbarComponent implements OnInit {
 
   pagesInfo: PageInfo[] = [];
+  needHeader: boolean;
 
-  constructor(private http: HttpClient) {
-    $(window).on('scroll', function () {
-      if ($(window).scrollTop() > 200)
+  constructor(private dataService: DataService, private config: ConfigService) {
+    this.config.needHeaderVar$.subscribe( data => {
+      this.needHeader = data;
+      if(!this.needHeader)
       {
         $('#mainNav').addClass('header-paint');
-      } else
+      }
+      else
       {
-        // remove the background property so it comes transparent again (defined in your css)
         $('#mainNav').removeClass('header-paint');
       }
     });
   }
 
+  @HostListener("window:scroll", ["$event"])
+  onScroll()
+  {
+    if ($(window).scrollTop() > 200 || !this.needHeader)
+    {
+      $('#mainNav').addClass('header-paint');
+    } 
+    else
+    {
+      $('#mainNav').removeClass('header-paint');
+    }
+  }
+
   ngOnInit() {
-    this.http.get('/assets/pages_info.json').subscribe( (pagesInfo: PageInfo[]) => {
-      // console.log(pagesInfo);
+    this.dataService.getPagesInfo().subscribe( (pagesInfo: PageInfo[]) => {
       this.pagesInfo = pagesInfo;
     });
   }

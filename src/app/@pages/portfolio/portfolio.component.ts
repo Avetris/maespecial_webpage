@@ -13,9 +13,7 @@ export class PortfolioComponent implements OnInit {
   constructor(private translateService: TranslateConfigService, private config: ConfigService) { }
 
   ngOnInit() {
-    this.config.updatebgUrlSubject(PORTFOLIO.bg);
-    this.config.updateTitleSubject(PORTFOLIO.title);
-    this.config.updateButtonTitleSubject(PORTFOLIO.button);
+    this.config.updateDataSubject(PORTFOLIO);
   }
 
 }

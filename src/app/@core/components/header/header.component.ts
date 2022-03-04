@@ -1,5 +1,5 @@
 import { ConfigService } from './../../services/config.service';
-import { Component, ViewEncapsulation  } from '@angular/core';
+import { Component, DebugElement, ViewEncapsulation  } from '@angular/core';
 // Declaramos las variables para jQuery
 declare var $: any;
 
@@ -13,6 +13,7 @@ export class HeaderComponent {
   bgUrl: string;
   title: string;
   btntitle: string;
+  needHeader: boolean
   constructor(private config: ConfigService) {
     this.config.bgVar$.subscribe( data => {
       this.bgUrl = data;
@@ -23,8 +24,14 @@ export class HeaderComponent {
     this.config.btnTitlVar$.subscribe( data => {
       this.btntitle = data;
     });
-    $(window).on('load', function () {
-      setTimeout(getText, 1);
+    this.config.needHeaderVar$.subscribe( data => {
+      this.needHeader = data;
+      if(this.needHeader)
+      {
+        $(window).on('load', function () {
+          setTimeout(getText, 1);
+        });      
+      }
     });
 
     function getText()

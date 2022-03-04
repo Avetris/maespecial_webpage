@@ -1,42 +1,59 @@
 {
-    "HELLO_WORLD": "ddddd",
-    "articles": {
-        "last": "Prueba de mensaje largo",
-        "description": "Tutoriales, promoción de cursos,..."
+    "general": {
+        "show": "Ver"
     },
-    "buttons": {
-        "olderPosts": "Post antiguos",
-        "readMore": "Leer más"
+    "home": {
+        "menu": "Descripción",
+        "header": {
+            "description": "¿Cómo soy?",
+            "button": "Descripción"
+        }
+    },
+    "resources": {
+        "menu": {
+            "name": "Recursos",
+            "companions": "Compañeros",
+            "theories": "Teóricos",
+            "commercials": "Comerciales",
+            "ownCreation": "Creación Propia"
+        },
+        "header": {
+            "description": "Para trabajar..."
+        },
+        "empty":{
+            "title": "Recursos Vacíos",
+            "description": "No se ha añadido ningún recurso de este tipo todavía. Vuelva a comprobarlo más tarde."
+        },
+        "companions": {
+            "name": "Recursos de Compañeros",
+            "description": "Descripcion sobre compañeros"
+        },
+        "theories": {
+            "name": "Recursos Teóricos",
+            "description": "Descripcion sobre Teorias"
+        },
+        "commercials": {
+            "name": "Recursos Comerciales",
+            "description": "Descripcion sobre Comerciales"
+        },
+        "ownCreations": {
+            "name": "Recursos de Creaciones Propias",
+            "description": "Descripcion sobre Creación propia"
+        }
+    },
+    "diary": {
+        "menu": "Diario",
+        "header": {
+            "description": "Para trabajar..."
+        }
     },
     "contact": {
-        "title": "Contacto",
-        "description": "Escribe un mensaje con lo que desees comentar"
+        "menu": "Contacto"
     },
     "cookies":{
         "message": "Este sitio utiliza cookies para mejorar la experiencia de usuario. Si continuas navegando considero que aceptas el uso de cookies."
     },
-    "courses": {
-        "title": "Cursos",
-        "description": "Lista de cursos online"
-    },
     "publishedBy": "Publicado por",
-    "menus": {
-        "about": "Sobre mi",
-        "contact": "Contacto",
-        "dropdown": "Dropdown",
-        "dropdown2": "Dropdown2",
-        "courses": "Cursos",
-        "home": "Blog",
-        "language": "Idioma",
-        "portfolio": "Portfolio",
-        "login": "Login",
-        "register": "Registro"
-    },
-    "portfolio": {
-        "title": "Portfolio",
-        "description": "Lista de los trabajos que he realizado"
-    },
-    "showMoreArticles": "Mostrar más artículos",
     "privacyPolicy": {
         "footer": "Política de Privacidad",
         "title": "Política de Privacidad"

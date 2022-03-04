@@ -16,7 +16,6 @@ export class TranslateConfigService {
 
         // If not exist langCodes in parameter of constructor
         // Initialize constant to load languages codes, this codes uses to load assets/i18n directory json files
-        console.log(config);
         if (this.config.codes === undefined || this.config.codes.length === 0) {
             this.config.codes = ['en', 'es'];
             console.warn('You have not input the language codes that the application contains ' +

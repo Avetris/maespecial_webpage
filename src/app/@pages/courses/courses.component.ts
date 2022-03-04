@@ -11,9 +11,7 @@ import { TranslateConfigService } from 'src/app/@core/services/translate-config.
 export class CoursesComponent {
 
   constructor(config: ConfigService, private translateService: TranslateConfigService) {
-    config.updatebgUrlSubject(COURSES.bg);
-    config.updateTitleSubject(COURSES.title);
-    config.updateButtonTitleSubject(COURSES.button);
+    config.updateDataSubject(COURSES);
   }
 
 }

@@ -11,9 +11,7 @@ import { CONTACT } from 'src/app/@core/components/header/header.constants';
 export class ContactComponent {
 
   constructor(config: ConfigService, private translateService: TranslateConfigService) {
-    config.updatebgUrlSubject(CONTACT.bg);
-    config.updateTitleSubject(CONTACT.title);
-    config.updateButtonTitleSubject(CONTACT.button);
+    config.updateDataSubject(CONTACT);
   }
 
 }

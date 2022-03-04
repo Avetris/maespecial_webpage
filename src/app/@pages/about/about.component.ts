@@ -14,9 +14,6 @@ export class AboutComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.config.updatebgUrlSubject(ABOUT.bg);
-    this.config.updateTitleSubject(ABOUT.title);
-    this.config.updateButtonTitleSubject(ABOUT.button);
+    this.config.updateDataSubject(ABOUT);
   }
-
 }

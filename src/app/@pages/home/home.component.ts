@@ -11,9 +11,7 @@ import { HOME } from 'src/app/@core/components/header/header.constants';
 export class HomeComponent {
   loading: boolean;
   constructor(config: ConfigService, private translateService: TranslateConfigService) {
-    config.updatebgUrlSubject(HOME.bg);
-    config.updateTitleSubject(HOME.title);
-    config.updateButtonTitleSubject(HOME.button);
+    config.updateDataSubject(HOME);
     this.loading = true;
     setTimeout(() => {
       this.loading = false;
