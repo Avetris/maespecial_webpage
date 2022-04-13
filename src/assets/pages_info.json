@@ -4,6 +4,14 @@
         "textName": "home.menu"
     },
     {
+        "routeName": "/profile",
+        "textName": "profile.menu"
+    },
+    {
+        "routeName": "/diary",
+        "textName": "diary.menu"
+    },
+    {
         "textName": "resources.menu.name",
         "children": [
             {
@@ -23,10 +31,6 @@
                 "textName": "resources.menu.ownCreation"
             }
         ]
-    },
-    {
-        "routeName": "/diary",
-        "textName": "diary.menu"
     },
     {
         "routeName": "/contact",

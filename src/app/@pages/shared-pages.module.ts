@@ -13,7 +13,6 @@ import { LoadingModule } from '../@core/components/loading/loading.module';
     CommonModule,
     LazyLoadModule,
     LoadingModule
-  ],
-  declarations: []
+  ]
 })
 export class SharedPagesModule { }

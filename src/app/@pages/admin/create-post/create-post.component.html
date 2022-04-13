@@ -1,0 +1,13 @@
+<div>
+    Presentation in HTML
+    <div class="ql-container ql-snow" style="border-width: 0;">
+      <div style="width: 100%" class="ql-editor" [innerHTML]="form"></div>
+    </div>
+</div>
+
+<quill-editor id="editor2" [styles]="{minHeight: '400px'}" [modules]="modules" theme="snow" format="html"
+    (onFocus)="focus($event)" 
+    (onEditorChanged)="changedEditor($event)" 
+    (onBlur)="blur($event)" 
+    (onEditorCreated)="created($event)" >
+</quill-editor>

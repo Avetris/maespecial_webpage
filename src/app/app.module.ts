@@ -38,7 +38,6 @@ const PIPES = [
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
-
   ],
   exports: [ TranslateCustomModule ],
   providers: [],

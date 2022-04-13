@@ -10,6 +10,7 @@ import { ButtonModule } from 'src/app/@core/components/button/button.module';
 import { PublishInfoModule } from 'src/app/@core/components/publish-info/publish-info.module';
 import { AccessDirectModule } from 'src/app/@core/components/access-direct/access-direct.module';
 
+
 @NgModule({
   declarations: [HomeComponent],
   imports: [

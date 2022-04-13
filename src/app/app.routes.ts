@@ -14,6 +14,10 @@ const APP_ROUTES: Routes = [
     { path: 'diary', loadChildren: () => import('./@pages/portfolio/portfolio.module').then(m => m.PortfolioModule)},
     { path: 'contact', loadChildren: () => import('./@pages/contact/contact.module').then(m => m.ContactModule)},
     { path: 'privacy-policy', loadChildren: () => import('./@pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule)},
+    { path: 'admin', children: [
+        { path: '', loadChildren: () => import('./@pages/admin/create-post/create-post.module').then(m => m.CreatePostModule)},
+        { path: 'create', loadChildren: () => import('./@pages/admin/create-post/create-post.module').then(m => m.CreatePostModule)}
+    ]},
     { path: '**', pathMatch: 'full' , redirectTo: 'home' },
 ];
 

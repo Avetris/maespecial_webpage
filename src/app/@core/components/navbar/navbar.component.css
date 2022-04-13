@@ -3,6 +3,11 @@
 	text-decoration: underline;
 }
 
+.nav-link {
+	font-size: 60px;	
+    font-family: 'Vogue' ;
+}
+
 .header-paint {
 	background-color: cadetblue !important
 }

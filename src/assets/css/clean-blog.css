@@ -4,10 +4,16 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-clean-blog/blob/master/LICENSE)
  */
 
+
+@font-face {
+  font-family: 'Escolar';
+  src: url('../font/Escolar.TTF') format("opentype");
+}
+
 body {
-  font-size: 20px;
+  font-size: 25px;
   color: #212529;
-  font-family: 'Lora', 'Times New Roman', serif;
+  font-family: 'Escolar';
 }
 
 p {
@@ -417,4 +423,28 @@ footer .copyright {
 .btn-lg {
   font-size: 16px;
   padding: 25px 35px;
+}
+
+/*
+  Shared css for post and quill rich text
+*/
+
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: attr(data-value) !important; 
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=escolar]::before, 
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=escolar]::before {
+  content: 'escolar'; font-family: 'Escolar';
+}
+
+.ql-snow .ql-picker.ql-font .ql-picker-label[data-value=vogue]::before, 
+.ql-snow .ql-picker.ql-font .ql-picker-item[data-value=vogue]::before {
+  content: 'vogue'; font-family: 'Vogue';
+}
+
+.ql-editor { /*Default quill format*/
+  font-size: "10px";
+  font-family: "Escolar";
 }

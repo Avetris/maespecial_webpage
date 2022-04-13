@@ -3,11 +3,39 @@
         "show": "Ver"
     },
     "home": {
-        "menu": "Descripción",
+        "menu": "Inicio",
         "header": {
-            "description": "¿Cómo soy?",
-            "button": "Descripción"
+            "description": "Inicio",
+            "button": "Entrar"
+        },
+        "title": "¿Que vas a encontrar en esta pagina?",
+        "content": [
+            "Materiales y recursos inclusivos para trabajar en todas las aulas.",
+            "Entre todos nos ayudamos a aprender, a ser mejores maestros y maestras, a crear materiales adaptados para nuestro alumnado. Pero… necesitamos creatividad, tiempo, tener ideas…",
+            "En está página encontraréis ideas y propias en el apartado de recursos – creación propia y recursos de compañeros y compañeras maestros y maestras con un gran talento para hacer materiales a los que merece la pena seguir y ayudar a seguir creciendo en redes sociales.",
+            "Además, hay un apartado de teoría dónde encontrareis un montón de páginas webs interesantes dónde informaros sobre las necesidades específicas de apoyo educativo de vuestro alumnado y cómo ayudarles."
+        ],
+        "details": {
+            "profile": ["¿Quien soy?"],
+            "resources": ["¿Quien soy?"],
+            "diary": {
+                "title": "Diario",
+                "content": "Escribiré como si de un diario se tratase de mis experiencias con mis alumnos"
+            }
         }
+    },
+    "profile": {
+        "menu": "¿Quien soy?",
+        "header": {
+            "description": "¿Quien soy?",
+            "button": "Ver"
+        },
+        "content": [
+            "¡Hola! Yo soy Andrea, una joven maestra PT que comienza un nuevo proyecto.",
+            "El objetivo que tengo para esta página es el de dar a conocer a otras maestras y maestros que cuelgan sus materiales en las redes sociales e ir colgando mis propios materiales, que he diseñado para mis alumnos y voy haciendo poniendo en práctica, para mostrar ideas a mis compañeros y compañeras.",
+            "Este proyecto esta comenzando en un año lleno de retos y proyectos. Poco a poco en el apartado de diario iré colgando post sobre cómo he utilizado los materiales, tanto los propios como los de otros y la respuesta de los alumnos y alumnas ante el material, y por su puesto os podéis animar a dejar algún comentario de ánimo o mejora.",
+            "Espero que os anime a curiosear por la web y ver algo que os guste y os motive para hacerlo en vuestras aulas. "
+        ]
     },
     "resources": {
         "menu": {
