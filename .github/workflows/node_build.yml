@@ -43,7 +43,7 @@ jobs:
         id: make-commit
 
         run: |
-          git add -f * -except node_modules
+          git add -f * -- node_modules/*
           git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
