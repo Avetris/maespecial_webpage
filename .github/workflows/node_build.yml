@@ -20,7 +20,9 @@ jobs:
       
       - name: Install dependencies
         run: npm ci    
-      - run: npm run build --if-present   
+      - run: |
+          npm run build --if-present   
+          rm -rf node_modules
 
 #      - name: Remove File and Copy File to Root
 #        run: |    
@@ -42,8 +44,9 @@ jobs:
         id: make-commit
 
         run: |
+          git add -f build/*
           git add *
-          git commit -f --message "Prepare release"
+          git commit --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
 #        run: |
