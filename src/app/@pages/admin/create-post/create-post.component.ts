@@ -191,7 +191,7 @@ export class CreatePostComponent {
         const uploadData = new FormData();
         uploadData.append('file', file, file.name);
 
-        this.http.post<FileUpload>('http://localhost:3000/upload', uploadData).toPromise()
+        this.http.post<FileUpload>('http://localhost:4500/api/upload', uploadData).toPromise()
         .then(result => {
           if(result.status)
           {
