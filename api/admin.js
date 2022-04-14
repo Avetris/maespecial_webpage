@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var url = require('url');
 
 router.get('/', function(req, res, next) {
     res.send('Express RESTful API');
@@ -26,10 +25,7 @@ router.post('/upload', async (req, res) => {
             //send response
             res.send({
                 status: true,
-                url: url.format({
-                    protocol: req.protocol,
-                    host: req.get('host'),
-                    pathname: `data/${file.name}`})
+                url: `data/${file.name}`
             });
         }
     } catch (err) {
