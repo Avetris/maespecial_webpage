@@ -1,6 +1,6 @@
 var express = require('express');
 const fileUpload = require('express-fileupload');
-// const cors = require('cors');
+const cors = require('cors');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ app.use(fileUpload({
     createParentPath: true
 }));
 
-// app.use(cors());
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
