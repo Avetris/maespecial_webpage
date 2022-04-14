@@ -43,7 +43,7 @@ jobs:
 
         run: |
           git add *
-          git commit --message "Prepare release"
+          git commit -f --message "Prepare release"
           echo "::set-output name=commit::$(git rev-parse HEAD)"
 
 #        run: |
