@@ -1,12 +1,44 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import 'quill-emoji/dist/quill-emoji.js';
 import { DomSanitizer } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 import Quill from 'quill'
-
 import BlotFormatter from 'quill-blot-formatter/dist/BlotFormatter';
+import { FileUpload } from 'src/app/models/FileUpload';
+
 Quill.register('modules/blotFormatter', BlotFormatter);
+// Quill.register('modules/imageHandler', ImageHandler);
+
+const ImageBlot = Quill.import('formats/image');
+
+export class CustomImageBlot extends ImageBlot {
+  static blotName = 'customImage';
+  static tagName = 'img';
+  /**
+   * Converts the HTML tag to image blot
+   * @param value 
+   */
+  static create(value) {
+    let node = super.create();
+    node.setAttribute('src', value.url);
+    node.setAttribute('alt', value.alt);
+    return node;
+  }
+
+  /**
+   * Converts the image blot to HTML tag
+   * @param node 
+   */
+  static value(node) {
+    var blot = {};
+    blot['url'] = node.getAttribute('url');
+    blot['alt'] = node.getAttribute('alt');
+    return blot;
+  }
+}
+Quill.register(CustomImageBlot);
 
 
 @Component({
@@ -19,15 +51,11 @@ export class CreatePostComponent {
   modules = {}
   form = this.byPassHTML("")
 
-  blured = false
-  focused = false
-
   fonts = ['escolar', 'vogue'];
   fontSizes = Array.from({length: 20}, (_, index) => `${(index - 1) * 2 + 12}px`);
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
     this.addFonts();
-    // this.addFontSizes();
 
     this.createQuillModules();
   }
@@ -41,22 +69,6 @@ export class CreatePostComponent {
 
     Quill.register(font, true)
     Quill.register(size, true);
-  }
-  
-  addFontSizes() {
-    var fontSizeStyles = ".ql-snow .ql-picker.ql-size .ql-picker-label::before,.ql-snow .ql-picker.ql-size .ql-picker-item::before {content: attr(data-value);}";
-
-    fontSizeStyles += `.ql-editor {font-size: ${this.fontSizes[0]};}`;
-                      
-    var node = document.createElement('style');
-    node.innerHTML = fontSizeStyles;
-    document.body.appendChild(node);    
-
-    const Size = Quill.import('attributors/style/size');
-    Size.whitelist = this.fontSizes;
-    Quill.register(Size, true);
-
-    
   }
 
   createQuillModules() {
@@ -89,38 +101,113 @@ export class CreatePostComponent {
           ['link', 'image', 'video'],                         // link and image, video
           ['emoji'],
         ],
-        handlers: { 'emoji': function () { } }
+        handlers: { 
+          'emoji': function () { },
+          'image': function() {
+            const input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.click();
+            input.onchange = async function() {
+              if (input.files != null) {  
+                let file = input.files[0];  
+                console.log('User trying to uplaod this:', file);
+                if (file != null) {  
+                    var reader = new FileReader();  
+                    reader.readAsDataURL(file);  
+                    reader.onerror = function(error) {  
+                        console.log('Error: ', error);  
+                    };  
+                    reader.onloadend = function() {  
+                        //Read complete  
+                        if (reader.readyState == 2) {  
+                            var base64result = reader.result;  
+                            const range = this.quill.getSelection();
+                            this.quill.insertEmbed(range.index, 'customImage', {url: base64result, alt: file.name}); 
+                        }
+                    }.bind(this);  
+                }  
+              }  
+            }.bind(this);
+          }
+        },
       }
     }
   }
 
   byPassHTML(html: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(html)
-  }
-
-  created(event: any) {
-    // event.editor.format
-    // tslint:disable-next-line:no-console
-    console.log('editor-created', event)
+    return html
   }
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection) {
     // tslint:disable-next-line:no-console
-    console.log('editor-change', event)
+    //console.log('editor-change', event)
     this.form = this.byPassHTML(event.editor.root.innerHTML)
   }
 
-  focus($event: any) {
-    // tslint:disable-next-line:no-console
-    console.log('focus', $event)
-    this.focused = true
-    this.blured = false
+  async uploadPost()
+  {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(this.form, 'text/html');
+    var promises = [];
+    doc.querySelectorAll("img").forEach(img => {
+      console.log(img.src.split("/").reverse()[0])
+
+      var p = this.uploadImage(this.dataURLtoFile(img.src, img.alt));
+      promises.push(p);
+      p.then((url) => {   
+        console.log(url)     
+        if(url != null)
+        {
+          img.src = url;
+          img.alt = "";
+        }
+      })      
+    })
+
+    Promise.all(promises).then(() => {
+      console.log(doc.documentElement.outerHTML);
+    })   
   }
 
-  blur($event: any) {
-    // tslint:disable-next-line:no-console
-    console.log('blur', $event)
-    this.focused = false
-    this.blured = true
+  dataURLtoFile(dataurl, filename) {
+ 
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+        
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    return new File([u8arr], filename, {type:mime});
+  }
+
+  uploadImage(file): Promise<string>
+  {
+    return new Promise((resolve, reject) => {
+        const uploadData = new FormData();
+        uploadData.append('file', file, file.name);
+
+        this.http.post<FileUpload>('http://localhost:3000/upload', uploadData).toPromise()
+        .then(result => {
+          if(result.status)
+          {
+            console.log(result)
+            resolve(result.url);
+          }
+          else
+          {                    
+            console.error('Error: status  fail');
+            reject(null);
+          }              
+      })
+      .catch(error => { 
+        console.error('Error:', error);
+        reject(null);
+      });
+    })    
   }
 }
