@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: 'Escolar';
-  src: url('../font/Escolar.TTF') format("opentype");
+  src: url('/assets/font/Escolar.TTF') format("opentype");
 }
 
 body {

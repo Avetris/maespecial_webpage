@@ -166,7 +166,8 @@ export class CreatePostComponent {
     })
 
     Promise.all(promises).then(() => {
-      console.log(doc.documentElement.outerHTML);
+      this.form = this.byPassHTML(doc.documentElement.innerHTML)
+      console.log(doc.documentElement.innerHTML);
     })   
   }
 

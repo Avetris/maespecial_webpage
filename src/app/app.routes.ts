@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { ResourcesModule } from './@pages/resources/resources.module';
+import { ModuleWithProviders } from '@angular/core';
 
 const APP_ROUTES: Routes = [
     { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(m => m.HomeModule)},
@@ -21,4 +20,4 @@ const APP_ROUTES: Routes = [
     { path: '**', pathMatch: 'full' , redirectTo: 'home' },
 ];
 
-export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(APP_ROUTES, { useHash: true, scrollPositionRestoration: 'enabled'});
+export const AppRoutingModule: ModuleWithProviders<RouterModule> = RouterModule.forRoot(APP_ROUTES, { useHash: true, scrollPositionRestoration: 'enabled'});

@@ -25,7 +25,7 @@ router.post('/upload', async (req, res) => {
             //send response
             res.send({
                 status: true,
-                url: `data/${file.name}`
+                url: `./data/${file.name}`
             });
         }
     } catch (err) {
