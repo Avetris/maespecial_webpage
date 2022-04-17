@@ -32,8 +32,7 @@ jobs:
       - name: Create release branch
         run: |
           git fetch
-          git checkout -b release
-          git pull --rebase
+          git checkout release
 
       - name: Initialize mandatory git config
         run: |
