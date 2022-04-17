@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 const APP_ROUTES: Routes = [
     { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(m => m.HomeModule)},
+    { path: 'home2', loadChildren: () => import('./@pages/home2/home.module').then(m => m.HomeModule)},
     { path: 'resources', children: [
         { path: '', loadChildren: () => import('./@pages/resources/resources.module').then(m => m.ResourcesModule)},         
         { path: 'companions', loadChildren: () => import('./@pages/resources/element/resources-element.module').then(m => m.ResourcesElementModule)},

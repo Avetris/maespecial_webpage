@@ -1,11 +1,11 @@
-<div>
-    Presentation in HTML
-    <div class="ql-container ql-snow" style="border-width: 0;">
-      <div style="width: 100%" class="ql-editor" [innerHTML]="form"></div>
-    </div>
-</div>
-
 <quill-editor id="editor2" [styles]="{minHeight: '400px'}" [modules]="modules" theme="snow" format="html"
-    (onEditorChanged)="changedEditor($event)"  >
+    (onEditorChanged)="changedEditor($event)">
 </quill-editor>
 <button mat-button (click)="uploadPost()">Publicar</button>
+
+<div>
+  Presentation in HTML
+  <div class="ql-container ql-snow" style="border-width: 0;">
+    <div style="width: 100%" [innerHTML]="byPassHTML(form)"></div>
+  </div>
+</div>

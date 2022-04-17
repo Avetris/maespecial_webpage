@@ -185,9 +185,13 @@ header.masthead {
   margin-bottom: 50px;
   background: no-repeat center center;
   background-color: #868e96;
-  background-attachment: scroll;
   position: relative;
-  background-size: cover;
+  background-size: 100% 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 header.masthead .overlay {
@@ -196,7 +200,7 @@ header.masthead .overlay {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: #212529;
+  background-color: #21252959;
   opacity: 0.5;
 }
 
@@ -442,9 +446,4 @@ footer .copyright {
 .ql-snow .ql-picker.ql-font .ql-picker-label[data-value=vogue]::before, 
 .ql-snow .ql-picker.ql-font .ql-picker-item[data-value=vogue]::before {
   content: 'vogue'; font-family: 'Vogue';
-}
-
-.ql-editor { /*Default quill format*/
-  font-size: "14px";
-  font-family: "Escolar";
 }

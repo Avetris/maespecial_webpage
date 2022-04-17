@@ -40,6 +40,31 @@ export class CustomImageBlot extends ImageBlot {
 }
 Quill.register(CustomImageBlot);
 
+const BlockPrototype = Quill.import("blots/block");
+
+class DefaultSettingsBlock extends BlockPrototype {
+  domNode: any;
+  constructor(domNode, value) {
+    super(domNode, value);
+    this.format("size", "18px");
+    this.format("font", "escolar");
+  }
+
+  static tagName = "P";
+
+  format(name, value) {
+    if (name === "size") {
+      this.domNode.style.fontSize = value;
+    } else if (name === "font") {
+      this.domNode.style.fontFamily = value;
+    } else {
+      super.format(name, value);
+    }
+  }
+}
+
+Quill.register(DefaultSettingsBlock, true);
+
 
 @Component({
   selector: 'blog-create-post',
@@ -49,7 +74,7 @@ Quill.register(CustomImageBlot);
 export class CreatePostComponent {
   
   modules = {}
-  form = this.byPassHTML("")
+  form = ""
 
   fonts = ['escolar', 'vogue'];
   fontSizes = Array.from({length: 20}, (_, index) => `${(index - 1) * 2 + 12}px`);
@@ -136,13 +161,14 @@ export class CreatePostComponent {
   }
 
   byPassHTML(html: string) {
-    return html
+    return this.sanitizer.bypassSecurityTrustHtml(html)
   }
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection) {
     // tslint:disable-next-line:no-console
-    //console.log('editor-change', event)
-    this.form = this.byPassHTML(event.editor.root.innerHTML)
+    // console.log('editor-change', event)
+    this.form = event.editor.root.innerHTML
+    console.log(this.form)
   }
 
   async uploadPost()
@@ -166,7 +192,7 @@ export class CreatePostComponent {
     })
 
     Promise.all(promises).then(() => {
-      this.form = this.byPassHTML(doc.documentElement.innerHTML)
+      this.form = doc.documentElement.innerHTML
       console.log(doc.documentElement.innerHTML);
     })   
   }

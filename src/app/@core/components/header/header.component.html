@@ -1,7 +1,7 @@
 <!-- Page Header -->
 <header *ngIf="needHeader; then header_content else margin_content"></header>
 <ng-template #header_content>
-  <header class="masthead" [ngStyle]="{background: 'url(' + bgUrl + ')'}">
+  <header class="masthead" [style]="{background: 'url(' + bgUrl + ')'}">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">

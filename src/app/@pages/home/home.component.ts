@@ -10,6 +10,20 @@ import { HOME } from 'src/app/@core/components/header/header.constants';
 })
 export class HomeComponent {
   loading: boolean;
+
+  content = [{
+    "image": "./assets/img/resources/main.jpg",
+    "title": "home.details.profile",
+    "description": "home.details.profile",
+    "route": "/resources",
+  },
+  {
+    "image": "./assets/img/resources/main.jpg",
+    "title": "home.details.profile",
+    "description": "home.details.profile",
+    "route": "/resources",
+  }]
+
   constructor(config: ConfigService, private translateService: TranslateConfigService) {
     config.updateDataSubject(HOME);
     this.loading = true;
