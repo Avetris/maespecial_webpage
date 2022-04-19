@@ -1,7 +1,6 @@
 import { ContactComponent } from './contact.component';
 import { NgModule } from '@angular/core';
 
-import { ContactRoutingModule } from './contact-routing.module';
 import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
 import { SharedPagesModule } from '../shared-pages.module';
 import { FormsModule } from '@angular/forms';
@@ -11,7 +10,6 @@ import { FormsModule } from '@angular/forms';
   declarations: [ContactComponent],
   imports: [
     SharedPagesModule,
-    ContactRoutingModule,
     SidebarModule,
     FormsModule
   ],

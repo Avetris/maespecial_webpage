@@ -1,6 +1,5 @@
 import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
 import { NgModule } from '@angular/core';
-import { PrivacyPolicyRoutingModule } from './privacy_policy-routing.module';
 import { PrivacyPolicyComponent } from './privacy-policy.component';
 import { SharedPagesModule } from '../shared-pages.module';
 
@@ -9,8 +8,7 @@ import { SharedPagesModule } from '../shared-pages.module';
   declarations: [PrivacyPolicyComponent],
   imports: [
     SharedPagesModule,
-    SidebarModule,
-    PrivacyPolicyRoutingModule
+    SidebarModule
   ],
   exports: [PrivacyPolicyComponent]
 })
