@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Declaramos las variables para jQuery
 declare var $: any;
@@ -11,7 +12,7 @@ declare var $: any;
 export class AppComponent {
   title = 'maespecial';
 
-  constructor() {
+  constructor(public router: Router) {
     // Floating label headings for the contact form
     $('body').on('input propertychange', '.floating-label-form-group', function(e) {
       $(this).toggleClass('floating-label-form-group-with-value', !!$(e.target).val());

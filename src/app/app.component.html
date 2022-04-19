@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<blog-navbar></blog-navbar>
-<blog-header></blog-header>
+<blog-navbar *ngIf="router.url.indexOf('/admin') == -1"></blog-navbar>
+<blog-header *ngIf="router.url.indexOf('/admin') == -1"></blog-header>
 <!--<div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
@@ -26,7 +26,7 @@
 
 <hr>
 
-<blog-footer></blog-footer>
+<blog-footer *ngIf="router.url.indexOf('/admin') == -1"></blog-footer>
 
 <!--<cookie-law position="bottom" name="ng4topCookieLaw" expiration="7">
     {{ 'cookies.message' | translate }}

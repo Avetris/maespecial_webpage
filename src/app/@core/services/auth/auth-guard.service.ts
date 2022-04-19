@@ -10,7 +10,6 @@ export class AuthGuardService implements CanActivate {
     constructor(public authService: AuthService, public router: Router) { }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
-        console.log("AuthGuardService")
         var self = this;
         return this.authService.isAuth()
             .then((res) => { 

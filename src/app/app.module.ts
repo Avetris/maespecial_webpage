@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TranslateCustomModule } from './@core/modules/translate-custom.module';
 import { AuthGuardService } from './@core/services/auth/auth-guard.service';
 import { AuthService } from './@core/services/auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const COMPONENTS = [
   AppComponent
@@ -39,9 +40,10 @@ const PIPES = [
     SidebarModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
-  exports: [ TranslateCustomModule],
+  exports: [ TranslateCustomModule, ReactiveFormsModule],
   providers: [AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })
