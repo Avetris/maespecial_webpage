@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { CreatePostComponent } from './create-post.component';
 import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
-import { PosterImageModule } from 'src/app/@core/components/poster-image/poster-image.module';
 import { SharedPagesModule } from '../../shared-pages.module';
 import { ButtonModule } from 'src/app/@core/components/button/button.module';
 import { PublishInfoModule } from 'src/app/@core/components/publish-info/publish-info.module';
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     SharedPagesModule,
     SidebarModule,
-    PosterImageModule,
     ButtonModule,
     PublishInfoModule,
     AccessDirectModule,

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 
  @Injectable()
 export class AuthService {
@@ -8,8 +8,7 @@ export class AuthService {
     apiUrl: string;
 
     constructor(private http: HttpClient) {
-       // this.apiUrl = `https://${window.location.hostname}/api/admin`;        
-        this.apiUrl = `http://localhost:4500/api/admin`;        
+        this.apiUrl = isDevMode() ? "http://localhost:4500/api/admin" : `https://${window.location.hostname}/api/admin`;
         this.isAuth();
     }
 

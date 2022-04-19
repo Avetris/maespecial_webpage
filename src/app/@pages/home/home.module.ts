@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HomeComponent } from './home.component';
 import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
-import { PosterImageModule } from 'src/app/@core/components/poster-image/poster-image.module';
 import { SharedPagesModule } from '../shared-pages.module';
 import { ButtonModule } from 'src/app/@core/components/button/button.module';
 import { PublishInfoModule } from 'src/app/@core/components/publish-info/publish-info.module';
@@ -14,7 +13,6 @@ import { AccessDirectModule } from 'src/app/@core/components/access-direct/acces
   imports: [
     SharedPagesModule,
     SidebarModule,
-    PosterImageModule,
     ButtonModule,
     PublishInfoModule,
     AccessDirectModule

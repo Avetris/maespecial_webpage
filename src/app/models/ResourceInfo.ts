@@ -3,7 +3,6 @@ export class ResourceTypeInfo {
     description!: string
     image!: string
     route!: string
-    data!: ResourceInfo[]
 }
 
 export class ResourceInfo {
