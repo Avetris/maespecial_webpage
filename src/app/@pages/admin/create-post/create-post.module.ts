@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CreatePostRoutingModule } from './create-post-routing.module';
 import { CreatePostComponent } from './create-post.component';
 import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
 import { PosterImageModule } from 'src/app/@core/components/poster-image/poster-image.module';
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
   declarations: [CreatePostComponent],
   imports: [
     SharedPagesModule,
-    CreatePostRoutingModule,
     SidebarModule,
     PosterImageModule,
     ButtonModule,

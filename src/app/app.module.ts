@@ -13,6 +13,8 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateCustomModule } from './@core/modules/translate-custom.module';
+import { AuthGuardService } from './@core/services/auth/auth-guard.service';
+import { AuthService } from './@core/services/auth/auth.service';
 
 const COMPONENTS = [
   AppComponent
@@ -39,8 +41,8 @@ const PIPES = [
     HttpClientModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
-  exports: [ TranslateCustomModule ],
-  providers: [],
+  exports: [ TranslateCustomModule],
+  providers: [AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

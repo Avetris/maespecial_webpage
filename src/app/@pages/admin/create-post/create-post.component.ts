@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import Quill from 'quill'
 import BlotFormatter from 'quill-blot-formatter/dist/BlotFormatter';
 import { FileUpload } from 'src/app/models/FileUpload';
+import { DataService } from 'src/app/@core/services/data.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
 // Quill.register('modules/imageHandler', ImageHandler);
@@ -79,7 +80,7 @@ export class CreatePostComponent {
   fonts = ['escolar', 'vogue'];
   fontSizes = Array.from({length: 20}, (_, index) => `${(index - 1) * 2 + 12}px`);
 
-  constructor(private sanitizer: DomSanitizer, private http: HttpClient) {
+  constructor(private sanitizer: DomSanitizer, private dataService: DataService) {
     this.addFonts();
 
     this.createQuillModules();
@@ -218,11 +219,10 @@ export class CreatePostComponent {
         const uploadData = new FormData();
         uploadData.append('file', file, file.name);
 
-        this.http.post<FileUpload>(`https://${window.location.hostname}/api/upload`, uploadData).toPromise()
+        this.dataService.uploadPostImage(uploadData)
         .then(result => {
           if(result.status)
           {
-            console.log(result)
             resolve(result.url);
           }
           else

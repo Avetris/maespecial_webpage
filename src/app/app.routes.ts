@@ -1,5 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
+import { AuthGuardService as AuthGuard } from './@core/services/auth/auth-guard.service';
+import { LoginComponent } from './@pages/admin/login/login.component';
+import { CreatePostComponent } from './@pages/admin/create-post/create-post.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', loadChildren: () => import('./@pages/home/home.module').then(m => m.HomeModule)},
@@ -15,8 +18,9 @@ const APP_ROUTES: Routes = [
     { path: 'contact', loadChildren: () => import('./@pages/contact/contact.module').then(m => m.ContactModule)},
     { path: 'privacy-policy', loadChildren: () => import('./@pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyModule)},
     { path: 'admin', children: [
-        { path: '', loadChildren: () => import('./@pages/admin/create-post/create-post.module').then(m => m.CreatePostModule)},
-        { path: 'create', loadChildren: () => import('./@pages/admin/create-post/create-post.module').then(m => m.CreatePostModule)}
+        { path: 'login', component: LoginComponent},
+        { path: 'create-post', canActivate: [AuthGuard], component: CreatePostComponent},
+        { path: 'create-resource', canActivate: [AuthGuard], component: CreatePostComponent}
     ]},
     { path: '**', pathMatch: 'full' , redirectTo: 'home' },
 ];

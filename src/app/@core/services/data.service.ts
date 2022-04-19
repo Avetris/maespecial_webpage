@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { FileUpload } from 'src/app/models/FileUpload';
 import { PageInfo } from 'src/app/models/PageInfo';
 import { ResourceInfo, ResourceTypeInfo } from 'src/app/models/ResourceInfo';
 
@@ -8,8 +9,14 @@ import { ResourceInfo, ResourceTypeInfo } from 'src/app/models/ResourceInfo';
   providedIn: 'root'
 })
 export class DataService {
+  
+  public adminPath = ""
+  anonyPath = ""
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient){
+    this.adminPath = `https://${window.location.hostname}/api/admin`
+    this.anonyPath = `https://${window.location.hostname}/api/anony`
+  }
 
   public getPagesInfo(): Observable<PageInfo[]>
   {    
@@ -39,6 +46,12 @@ export class DataService {
       });
     });     
   }
+
+  public uploadPostImage(data: FormData): Promise<FileUpload>
+  {      
+    return this.http.post<FileUpload>(`https://${window.location.hostname}/api/admin/upload`, data, {withCredentials: true}).toPromise()   
+  }
+
 
   private getResourceInfoKey(type: EResourcesType): string
   {
