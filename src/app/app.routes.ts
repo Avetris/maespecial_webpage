@@ -10,6 +10,7 @@ import { ResourcesElementComponent } from './@pages/resources/element/resources-
 import { PortfolioComponent } from './@pages/portfolio/portfolio.component';
 import { ContactComponent } from './@pages/contact/contact.component';
 import { PrivacyPolicyComponent } from './@pages/privacy-policy/privacy-policy.component';
+import { ManageResourcesComponent } from './@pages/admin/manage-resources/manage-resources.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent},
@@ -27,7 +28,7 @@ const APP_ROUTES: Routes = [
     { path: 'admin', children: [
         { path: 'login', component: LoginComponent},
         { path: 'create-post', canActivate: [AuthGuard], component: CreatePostComponent},
-        { path: 'create-resource', canActivate: [AuthGuard], component: CreatePostComponent}
+        { path: 'resources', canActivate: [AuthGuard], component: ManageResourcesComponent}
     ]},
     { path: '**', pathMatch: 'full' , redirectTo: 'home' },
 ];

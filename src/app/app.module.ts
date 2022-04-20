@@ -16,6 +16,14 @@ import { TranslateCustomModule } from './@core/modules/translate-custom.module';
 import { AuthGuardService } from './@core/services/auth/auth-guard.service';
 import { AuthService } from './@core/services/auth/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { ConfirmDialogComponent } from './@core/components/confirm-dialog/confirm-dialog.component';
+
 
 const COMPONENTS = [
   AppComponent
@@ -29,7 +37,8 @@ const PIPES = [
 @NgModule({
   declarations: [
     COMPONENTS,
-    PIPES
+    PIPES,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +50,13 @@ const PIPES = [
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    MatSelectModule,
+    NgxMatTimepickerModule,
+    MatNativeDateModule,
+    NgxMatMomentModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
   exports: [ TranslateCustomModule, ReactiveFormsModule],

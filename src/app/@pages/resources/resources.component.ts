@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RESOURCES } from 'src/app/@core/components/header/header.constants';
-import { ResourceTypeInfo } from 'src/app/models/ResourceInfo';
 import { ConfigService } from 'src/app/@core/services/config.service';
 import { TranslateConfigService } from 'src/app/@core/services/translate-config.service';
 
@@ -11,7 +10,7 @@ import { TranslateConfigService } from 'src/app/@core/services/translate-config.
 })
 export class ResourcesComponent {
 
-  resourcesTypes: ResourceTypeInfo[] = [
+  resourcesTypes = [
     {
       name: "resources.companions.name",
       description: "resources.companions.description",

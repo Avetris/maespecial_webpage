@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RESOURCES_COMMERCIALS, RESOURCES_COMPANIONS, RESOURCES_OWNCREATIONS, RESOURCES_THEORIES } from 'src/app/@core/components/header/header.constants';
-import { ResourceTypeInfo } from 'src/app/models/ResourceInfo';
+import { ResourceInfo } from 'src/app/models/ServerData';
 import { ConfigService } from 'src/app/@core/services/config.service';
-import { DataService, EResourcesType } from 'src/app/@core/services/data.service';
+import { ResourceService, EResourcesType } from 'src/app/@core/services/data/resources.service';
 import { TranslateConfigService } from 'src/app/@core/services/translate-config.service';
 import { Router } from '@angular/router';
 
@@ -14,11 +14,11 @@ import { Router } from '@angular/router';
 export class ResourcesElementComponent implements OnInit {
 
   resourceType: EResourcesType;
-  resourceData: ResourceTypeInfo
+  resourceData: ResourceInfo[]
 
   constructor(
     private router: Router,
-    private dataService: DataService, 
+    private resourceService: ResourceService, 
     private config: ConfigService, 
     private translateService: TranslateConfigService) {
       let page = this.router.url.split("/").pop();
@@ -45,7 +45,7 @@ export class ResourcesElementComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.dataService.getResourceData(this.resourceType).subscribe( (resourcesInfo: ResourceTypeInfo) => { 
+    this.resourceService.getResources(this.resourceType).subscribe( (resourcesInfo: ResourceInfo[]) => { 
       this.resourceData = resourcesInfo
     });
   }

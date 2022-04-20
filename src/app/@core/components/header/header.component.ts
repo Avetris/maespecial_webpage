@@ -1,4 +1,4 @@
-import { ConfigService } from './../../services/config.service';
+import { ConfigService } from 'src/app/@core/services/config.service';
 import { Component, DebugElement, ViewEncapsulation  } from '@angular/core';
 // Declaramos las variables para jQuery
 declare var $: any;

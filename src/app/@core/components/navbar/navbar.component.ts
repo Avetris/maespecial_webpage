@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { PageInfo } from 'src/app/models/PageInfo';
-import { ConfigService } from '../../services/config.service';
-import { DataService } from '../../services/data.service';
+import { ConfigService } from 'src/app/@core/services/config.service';
+import { AssetsService } from 'src/app/@core/services/data/assets.service';
   // Declaramos las variables para jQuery
   declare var $: any;
 @Component({
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   pagesInfo: PageInfo[] = [];
   needHeader: boolean;
 
-  constructor(private dataService: DataService, private config: ConfigService) {
+  constructor(private assetsService: AssetsService, private config: ConfigService) {
     this.config.needHeaderVar$.subscribe( data => {
       this.needHeader = data;
       if(!this.needHeader)
@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.getPagesInfo().subscribe( (pagesInfo: PageInfo[]) => {
+    this.assetsService.getPagesInfo().subscribe( (pagesInfo: PageInfo[]) => {
       this.pagesInfo = pagesInfo;
     });
   }

@@ -1,0 +1,107 @@
+p {
+    font-family: Lato;
+}
+
+.mat-table {
+    width: 100%;
+    margin: auto;
+    margin-top: 25px;
+}
+
+.btn-edit {
+    text-align: right;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.mat-row {
+    height: auto;
+}
+
+.mat-column-isSelected {
+    flex: none;
+    width: 50px;
+}
+
+.mat-column-isEdit {
+    flex: none;
+    width: 100px;
+}
+
+.mat-column-type {
+    flex: none;
+    width: 150px;
+}
+
+.table-header {
+    width: 90%;
+    margin: auto;
+    text-align: right;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mat-header-cell {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mat-cell {
+    text-align: center;
+    justify-content: center;
+}
+
+.button-add-row {
+    background: #1b9e1b;
+    color: #ffffff;
+}
+
+.button-remove-rows {
+    background: red;
+    color: #ffffff;
+    margin-right: 5px;
+}
+
+.button-remove {
+    color: red;
+}
+
+::ng-deep .mat-form-field-infix {
+    width: 100% !important;
+}
+
+.form-input {
+    padding-right: 5px;
+}
+
+.mat-cell {
+    padding-right: 5px;
+    padding-left: 5px;
+    word-break: break-all;
+}
+
+mat-header-cell,
+mat-cell:not(:first-child) {
+    /* row border */
+    border-left: 1px solid #ffa600;
+}
+
+mat-header-cell:last-child,
+mat-cell:last-child {
+    /* row border */
+    border-right: 1px solid #ffa600;
+}
+
+mat-row {
+    align-items: stretch;
+}
+
+mat-header-cell{  
+    font-size: 15px;
+    font-weight: bold;
+}

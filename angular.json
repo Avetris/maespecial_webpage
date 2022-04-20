@@ -8,7 +8,14 @@
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "blog",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -23,11 +30,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
+              "src/styles.scss",
               "./node_modules/quill/dist/quill.core.css",
               "./node_modules/quill/dist/quill.bubble.css",
               "./node_modules/quill/dist/quill.snow.css",
-              "./node_modules/quill-emoji/dist/quill-emoji.css"
+              "./node_modules/quill-emoji/dist/quill-emoji.css",
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css"
             ],
             "scripts": [
               "./node_modules/quill/dist/quill.min.js"
