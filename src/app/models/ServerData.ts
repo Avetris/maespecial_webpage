@@ -18,6 +18,19 @@ export class PostInfo {
     publishDate!: Date
 }
 
+
+export class PostInfoList {
+    data: PostInfo[]
+    meta!: PostMeta
+}
+
+export class PostMeta {
+    page!: number
+    pageSize!: number
+    length!: number
+}
+
+
 export class General {
     status!: number
 }

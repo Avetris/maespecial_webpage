@@ -4,7 +4,7 @@ import { ConfigService } from 'src/app/@core/services/config.service';
 import { TranslateConfigService } from 'src/app/@core/services/translate-config.service';
 
 @Component({
-  selector: 'blog-resources',
+  selector: 'app-resources',
   templateUrl: './resources.component.html',
   styleUrls: ['./resources.component.css']
 })

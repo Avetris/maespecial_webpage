@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ResourceService } from 'src/app/@core/services/data/resources.service';
 import { General, ResourceInfo } from 'src/app/models/ServerData';
-import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { DialogService, ESuccessType } from 'src/app/@core/services/dialog.service';
 
 var COLUMNS_SCHEDULE = [
   {
@@ -14,10 +14,11 @@ var COLUMNS_SCHEDULE = [
     key: 'type',
     type: 'select',
     options: {
-      companions: "Compañeros", 
-      commercials: "Comerciales", 
-      theories: "Teóricos", 
-      ownCreation: "Creación Propia"},
+      companions: "Compañeros",
+      commercials: "Comerciales",
+      theories: "Teóricos",
+      ownCreation: "Creación Propia"
+    },
     label: 'Tipo',
     required: true
   },
@@ -50,7 +51,7 @@ var COLUMNS_SCHEDULE = [
 ]
 
 @Component({
-  selector: 'blog-manage-resources',
+  selector: 'app-manage-resources',
   templateUrl: './manage-resources.component.html',
   styleUrls: ['./manage-resources.component.scss']
 })
@@ -59,8 +60,7 @@ export class ManageResourcesComponent {
   columnsSchema: any = COLUMNS_SCHEDULE
   dataSource = new MatTableDataSource<ResourceInfo>();
   valid: any = {};
-
-  constructor(public dialog: MatDialog, private resourceService: ResourceService) { }
+  constructor(private dialogService: DialogService, private resourceService: ResourceService) { }
 
   ngOnInit() {
     this.resourceService.getResources().subscribe((data: ResourceInfo[]) => {
@@ -69,13 +69,27 @@ export class ManageResourcesComponent {
   }
 
   editRow(row: ResourceInfo) {
-    if (row.id === -1) {
-      this.resourceService.createResources(row).subscribe((resource: ResourceInfo) => {
-        row.id = resource.id;
-        row.isEdit = false;
-      });
-    } else {
-      this.resourceService.updateResources(row).subscribe((general: General) => {if(general.status == 200) row.isEdit = false});
+    if (row.id === -1)
+    {
+      this.resourceService.createResources(row).subscribe(
+        (resource: ResourceInfo) => {
+          row.id = resource.id;
+          row.isEdit = false;
+          this.dialogService.showSuccessMessage(ESuccessType.INSERT)
+        }, error => { this.dialogService.showErrorMessage(error); });
+    } else
+    {
+      this.resourceService.updateResources(row).subscribe(
+        (general: General) => {
+          if (general.status == 200)
+          {
+            row.isEdit = false
+            this.dialogService.showSuccessMessage(ESuccessType.MODIFY)
+          } else
+          {
+            this.dialogService.showErrorMessage(`Status ${general.status}`);
+          }
+        }, error => { this.dialogService.showErrorMessage(error); console.log });
     }
   }
 
@@ -94,30 +108,59 @@ export class ManageResourcesComponent {
   }
 
   removeRow(id: number) {
-    this.resourceService.deleteResources(id).subscribe((general: General) => {
-      if(general.status == 200)
-      {
-        this.dataSource.data = this.dataSource.data.filter(
-          (r: ResourceInfo) => r.id !== id
-        );
-      }
-    });
+    this.dialogService.showConfirmDialog()
+      .subscribe((confirm) => {
+        if (confirm)
+        {
+          this.resourceService.deleteResources(id).subscribe((general: General) => {
+            if (general.status == 200)
+            {
+              this.dataSource.data = this.dataSource.data.filter(
+                (r: ResourceInfo) => r.id !== id
+              );
+              this.dialogService.showSuccessMessage(ESuccessType.REMOVE)
+            }
+            else
+            {
+              this.dialogService.showErrorMessage(`Status ${general.status}`);
+            }
+          }, error => {
+            this.dialogService.showErrorMessage(error);
+          });
+        }
+      });
   }
 
   removeSelectedRows() {
-    const users = this.dataSource.data.filter((r: ResourceInfo) => r.isSelected);
-    /*this.dialog
-      .open(ConfirmDialogComponent)
-      .afterClosed()
+    const resources = this.dataSource.data.filter((r: ResourceInfo) => r.isSelected);
+    this.dialogService.showConfirmDialog()
       .subscribe((confirm) => {
-        if (confirm) {
-          this.userService.deleteUsers(users).subscribe(() => {
-            this.dataSource.data = this.dataSource.data.filter(
-              (u: User) => !u.isSelected
-            );
-          });
+        if (confirm)
+        {
+          let errorMessage = null;
+          resources.forEach(
+            (res) => {
+              this.resourceService.deleteResources(res.id).subscribe(
+                (general: General) => {
+                  if (general.status == 200)
+                  {
+                    this.dataSource.data = this.dataSource.data.filter(
+                      (r: ResourceInfo) => r.id !== res.id
+                    );
+                  }
+                  else
+                  {
+                    errorMessage += `Status ${general.status} for ${res.id} ||`;
+                  }
+                }, error => {
+                  errorMessage += `${error} ||`;
+                });
+            }
+          )
+          if (!errorMessage) this.dialogService.showSuccessMessage(ESuccessType.REMOVE)
+          else this.dialogService.showErrorMessage(errorMessage);
         }
-      });*/
+      });
   }
 
   disableSubmit(index: number) {

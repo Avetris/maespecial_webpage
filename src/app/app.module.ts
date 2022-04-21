@@ -1,6 +1,7 @@
 import { FooterModule } from './@core/components/footer/footer.module';
 import { HeaderModule } from './@core/components/header/header.module';
 import { NavbarModule } from './@core/components/navbar/navbar.module';
+import { NavbarAdminModule } from './@core/components/navbar-admin/navbar-admin.module';
 import { AppRoutingModule } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +24,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { ConfirmDialogComponent } from './@core/components/confirm-dialog/confirm-dialog.component';
+import { MessageDialogComponent } from './@core/components/message-dialog/message-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 const COMPONENTS = [
@@ -38,12 +41,14 @@ const PIPES = [
   declarations: [
     COMPONENTS,
     PIPES,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NavbarModule,
+    NavbarAdminModule,
     HeaderModule,
     FooterModule,
     SidebarModule,
@@ -57,9 +62,10 @@ const PIPES = [
     NgxMatTimepickerModule,
     MatNativeDateModule,
     NgxMatMomentModule,
+    MatTooltipModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
-  exports: [ TranslateCustomModule, ReactiveFormsModule],
+  exports: [TranslateCustomModule, ReactiveFormsModule],
   providers: [AuthGuardService, AuthService],
   bootstrap: [AppComponent]
 })

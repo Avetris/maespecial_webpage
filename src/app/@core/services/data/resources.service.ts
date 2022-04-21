@@ -27,7 +27,7 @@ export class ResourceService extends DataService {
 
   public updateResources(resource: ResourceInfo): Observable<General>
   {      
-    return this.http.put<General>(`${this.adminPath}/resources/${resource.id}`, resource, {withCredentials: true});
+    return this.http.put<General>(`${this.adminPath}/resources`, resource, {withCredentials: true});
   }
 
   public deleteResources(id: number): Observable<General>

@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SidebarModule } from 'src/app/@core/components/sidebar/sidebar.module';
 import { SharedPagesModule } from '../../shared-pages.module';
-import { ButtonModule } from 'src/app/@core/components/button/button.module';
-import { PublishInfoModule } from 'src/app/@core/components/publish-info/publish-info.module';
-import { AccessDirectModule } from 'src/app/@core/components/access-direct/access-direct.module';
 
 import { FormsModule } from '@angular/forms';
 import { ManageResourcesComponent } from './manage-resources.component';
@@ -23,10 +19,6 @@ import { NgxMatMomentModule } from '@angular-material-components/moment-adapter'
   declarations: [ManageResourcesComponent],
   imports: [
     SharedPagesModule,
-    SidebarModule,
-    ButtonModule,
-    PublishInfoModule,
-    AccessDirectModule,
     MatTableModule,
     MatInputModule,
     MatButtonModule,

@@ -4,7 +4,7 @@ import { TranslateConfigService } from 'src/app/@core/services/translate-config.
 import { HOME } from 'src/app/@core/components/header/header.constants';
 
 @Component({
-  selector: 'blog-home',
+  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })

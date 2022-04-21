@@ -1,0 +1,35 @@
+<div class="row" *ngIf="loading">
+    <div class="col-lg">
+        <app-loading></app-loading>
+    </div>
+</div>
+<div class="row" *ngIf="!loading && !post">
+    <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card mb-4" *ngFor="let post of diary">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a href="#">
+                            <img class="img-fluid rounded" [src]="post.image" />
+                        </a>
+                    </div>
+                    <div class="col-lg-9">
+                        <h2 class="card-title">{{post.title}}</h2>
+                        <p class="post-meta" *ngIf="showNew(post.publishDate)">
+                            <span style="background:#219E46;">{{ 'diary.new' | translate}}</span>
+                        </p>
+                        <p class="card-text">{{post.description}}</p>
+                        <a [routerLink]="'/diary/' + post.id" class="btn btn-primary float-right">{{ 'diary.button' |
+                            translate }} &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+(page)="changePage($event)">
+</mat-paginator>
+
+<div class="row" *ngIf="!loading && post" [innerHTML]="post.content">
+</div>

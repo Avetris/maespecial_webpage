@@ -11,11 +11,7 @@ export const HOME: Header =
 
 export const DIARY: Header =
 {
-    title: 'articles.last',
-    button: './assets/img/diary-door.jpg',
-    isButtonText: false,
-    bg: './assets/img/home-bg.jpg',
-    needHeader: true
+    needHeader: false
 };
 
 export const RESOURCES: Header =
@@ -78,7 +74,7 @@ export const PRIVACY_POLICY: Header =
 export const COURSES: Header =
 {
     title: 'courses.title',
-    button: 'buttons.readMore',    
+    button: 'buttons.readMore',
     isButtonText: true,
     bg: './assets/img/home-bg.jpg',
     needHeader: true

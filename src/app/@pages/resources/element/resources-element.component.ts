@@ -7,7 +7,7 @@ import { TranslateConfigService } from 'src/app/@core/services/translate-config.
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'blog-companions',
+  selector: 'app-companions',
   templateUrl: './resources-element.component.html',
   styleUrls: ['./resources-element.component.css']
 })

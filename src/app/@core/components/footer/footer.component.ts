@@ -2,7 +2,7 @@ import { SharedElement } from './../../interfaces/shared-element.interface';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'blog-footer',
+  selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })

@@ -4,7 +4,7 @@ import { TranslateConfigService } from 'src/app/@core/services/translate-config.
 import { CONTACT } from 'src/app/@core/components/header/header.constants';
 
 @Component({
-  selector: 'blog-contact',
+  selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })

@@ -4,7 +4,7 @@ import { Component, DebugElement, ViewEncapsulation  } from '@angular/core';
 declare var $: any;
 
 @Component({
-  selector: 'blog-header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   encapsulation: ViewEncapsulation.None

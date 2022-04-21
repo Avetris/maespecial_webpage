@@ -5,7 +5,7 @@ import { AssetsService } from 'src/app/@core/services/data/assets.service';
   // Declaramos las variables para jQuery
   declare var $: any;
 @Component({
-  selector: 'blog-navbar',
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

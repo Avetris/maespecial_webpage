@@ -1,0 +1,25 @@
+.form {
+    width: 100%;
+    padding: 15px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex,
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-outline {
+    background-color: #0000001a;
+}
+
+::ng-deep mat-label,
+::ng-deep .mat-datepicker-toggle,
+::ng-deep .mat-datepicker-content .mat-calendar-next-button,
+::ng-deep .mat-datepicker-content .mat-calendar-previous-button,
+::placeholder {
+    color: #6f42c1;
+}
+
+.row {
+    margin: 15px;
+}

@@ -5,97 +5,81 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import Quill from 'quill'
 import BlotFormatter from 'quill-blot-formatter/dist/BlotFormatter';
+import { CustomImageBlot } from './custom-image.blot';
+import { DefaultSettingsBlock } from './default-settings.block';
 import { PostService } from 'src/app/@core/services/data/post.service';
+import { Router } from '@angular/router';
+import { General, PostInfo } from 'src/app/models/ServerData';
+import { CompressImageService } from 'src/app/@core/services/data/compress-image.service';
+import { take } from 'rxjs/operators';
+import { DialogService, ESuccessType } from 'src/app/@core/services/dialog.service';
 
 Quill.register('modules/blotFormatter', BlotFormatter);
-// Quill.register('modules/imageHandler', ImageHandler);
-
-const ImageBlot = Quill.import('formats/image');
-
-export class CustomImageBlot extends ImageBlot {
-  static blotName = 'customImage';
-  static tagName = 'img';
-  /**
-   * Converts the HTML tag to image blot
-   * @param value 
-   */
-  static create(value) {
-    let node = super.create();
-    node.setAttribute('src', value.url);
-    node.setAttribute('alt', value.alt);
-    return node;
-  }
-
-  /**
-   * Converts the image blot to HTML tag
-   * @param node 
-   */
-  static value(node) {
-    var blot = {};
-    blot['url'] = node.getAttribute('url');
-    blot['alt'] = node.getAttribute('alt');
-    return blot;
-  }
-}
 Quill.register(CustomImageBlot);
-
-const BlockPrototype = Quill.import("blots/block");
-
-class DefaultSettingsBlock extends BlockPrototype {
-  domNode: any;
-  constructor(domNode, value) {
-    super(domNode, value);
-    this.format("size", "18px");
-    this.format("font", "escolar");
-  }
-
-  static tagName = "P";
-
-  format(name, value) {
-    if (name === "size") {
-      this.domNode.style.fontSize = value;
-    } else if (name === "font") {
-      this.domNode.style.fontFamily = value;
-    } else {
-      super.format(name, value);
-    }
-  }
-}
-
 Quill.register(DefaultSettingsBlock, true);
 
 
 @Component({
-  selector: 'blog-create-post',
+  selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.css']
+  styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent {
-  
+
   modules = {}
-  form = ""
+
+  newPostInfo: PostInfo = { id: -1, title!: null, description: null, image: null, content: "", publishDate: null };
+  currentPostInfo: PostInfo;
 
   fonts = ['escolar', 'vogue'];
-  fontSizes = Array.from({length: 20}, (_, index) => `${(index - 1) * 2 + 12}px`);
+  fontSizes = Array.from({ length: 20 }, (_, index) => `${(index - 1) * 2 + 12}px`);
 
-  constructor(private sanitizer: DomSanitizer, private postService: PostService) {
+  constructor(private dialogService: DialogService,
+    private router: Router,
+    private sanitizer: DomSanitizer,
+    private postService: PostService,
+    private compressImage: CompressImageService) {
     this.addFonts();
 
     this.createQuillModules();
+
+    let post = this.router.url.split("/").pop();
+
+    if (Number(post))
+    {
+      let postId = Number(post)
+      this.postService.getPostData(postId).subscribe((post: PostInfo) => {
+        this.setData(post);
+      })
+    }
   }
 
-  addFonts() {   
+  setData(post: PostInfo) {
+    this.currentPostInfo = Object.assign({}, post);
+    this.newPostInfo = Object.assign({}, post);
+  }
+
+  disablePublish() {
+    return !this.newPostInfo.content ||
+      !this.newPostInfo.title ||
+      !this.newPostInfo.description ||
+      !this.newPostInfo.image ||
+      !this.newPostInfo.publishDate;
+  }
+
+  addFonts() {
     var font = Quill.import('attributors/style/font');
     const size = Quill.import('attributors/style/size');
-    
-    font.whitelist = this.fonts   
-    size.whitelist = this.fontSizes; 
+
+    font.whitelist = this.fonts
+    size.whitelist = this.fontSizes;
 
     Quill.register(font, true)
     Quill.register(size, true);
   }
 
   createQuillModules() {
+    const self = this;
     this.modules = {
       'emoji-shortname': true,
       'emoji-textarea': false,
@@ -125,33 +109,35 @@ export class CreatePostComponent {
           ['link', 'image', 'video'],                         // link and image, video
           ['emoji'],
         ],
-        handlers: { 
+        handlers: {
           'emoji': function () { },
-          'image': function() {
+          'image': function () {
             const input = document.createElement('input');
             input.setAttribute('type', 'file');
             input.setAttribute('accept', 'image/*');
             input.click();
-            input.onchange = async function() {
-              if (input.files != null) {  
-                let file = input.files[0];  
-                console.log('User trying to uplaod this:', file);
-                if (file != null) {  
-                    var reader = new FileReader();  
-                    reader.readAsDataURL(file);  
-                    reader.onerror = function(error) {  
-                        console.log('Error: ', error);  
-                    };  
-                    reader.onloadend = function() {  
-                        //Read complete  
-                        if (reader.readyState == 2) {  
-                            var base64result = reader.result;  
-                            const range = this.quill.getSelection();
-                            this.quill.insertEmbed(range.index, 'customImage', {url: base64result, alt: file.name}); 
-                        }
-                    }.bind(this);  
-                }  
-              }  
+            input.onchange = function () {
+              if (input.files != null)
+              {
+                let file = input.files[0];
+                if (file != null)
+                {
+                  self.compressImage.compress(file).pipe(take(1)).subscribe((compressedImage: File) => {
+                    var reader = new FileReader();
+                    reader.readAsDataURL(compressedImage);
+                    // reader.readAsDataURL(file);
+                    reader.onerror = function (error) { console.log('Error: ', error) };
+                    reader.onloadend = function () {
+                      if (reader.readyState == 2)
+                      {
+                        var base64result = reader.result;
+                        const range = this.quill.getSelection();
+                        this.quill.insertEmbed(range.index, 'customImage', { url: base64result, alt: file.name });
+                      }
+                    }.bind(this)
+                  });
+                }
+              }
             }.bind(this);
           }
         },
@@ -164,75 +150,64 @@ export class CreatePostComponent {
   }
 
   changedEditor(event: EditorChangeContent | EditorChangeSelection) {
-    // tslint:disable-next-line:no-console
-    // console.log('editor-change', event)
-    this.form = event.editor.root.innerHTML
-    console.log(this.form)
+    this.newPostInfo.content = event.editor.root.innerHTML
   }
 
-  async uploadPost()
-  {
-    var parser = new DOMParser();
-    var doc = parser.parseFromString(this.form, 'text/html');
-    var promises = [];
-    doc.querySelectorAll("img").forEach(img => {
-      console.log(img.src.split("/").reverse()[0])
+  onChange(event) {
 
-      var p = this.uploadImage(this.dataURLtoFile(img.src, img.alt));
-      promises.push(p);
-      p.then((url) => {   
-        console.log(url)     
-        if(url != null)
-        {
-          img.src = url;
-          img.alt = "";
-        }
-      })      
-    })
+    const reader = new FileReader();
 
-    Promise.all(promises).then(() => {
-      this.form = doc.documentElement.innerHTML
-      console.log(doc.documentElement.innerHTML);
-    })   
-  }
-
-  dataURLtoFile(dataurl, filename) {
- 
-    var arr = dataurl.split(','),
-        mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), 
-        n = bstr.length, 
-        u8arr = new Uint8Array(n);
-        
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
+    if (event.target.files && event.target.files.length)
+    {
+      const imageFile = event.target.files[0];
+      this.compressImage.compress(imageFile).pipe(take(1))
+        .subscribe((compressedImage: File) => {
+          reader.readAsDataURL(compressedImage);
+          reader.onload = () => {
+            this.newPostInfo.image = reader.result as string;
+          };
+        });
     }
-    
-    return new File([u8arr], filename, {type:mime});
   }
 
-  uploadImage(file): Promise<string>
+  disable(field)
   {
-    return new Promise((resolve, reject) => {
-        const uploadData = new FormData();
-        uploadData.append('file', file, file.name);
+    if(field == "title") return this.newPostInfo.title == this.currentPostInfo.title;
+    else if(field == "description") return this.newPostInfo.description == this.currentPostInfo.description;
+    else if(field == "publishDate") return this.newPostInfo.publishDate == this.currentPostInfo.publishDate;
+    else if(field == "content") return this.newPostInfo.content == this.currentPostInfo.content;
+    else if(field == "image") return this.newPostInfo.image == this.currentPostInfo.image;
+    else return false;
+  }
 
-        this.postService.uploadPostImage(uploadData)
-        .then(result => {
-          if(result.status)
-          {
-            resolve(result.url);
-          }
-          else
-          {                    
-            console.error('Error: status  fail');
-            reject(null);
-          }              
-      })
-      .catch(error => { 
-        console.error('Error:', error);
-        reject(null);
+  revert(field)
+  {
+    if(field == "title") this.newPostInfo.title = this.currentPostInfo.title;
+    else if(field == "description") this.newPostInfo.description = this.currentPostInfo.description;
+    else if(field == "publishDate") this.newPostInfo.publishDate = this.currentPostInfo.publishDate;
+    else if(field == "content") this.newPostInfo.content = this.currentPostInfo.content;
+  }
+  revertImage(input) { this.newPostInfo.image = this.currentPostInfo.image; input.value = ''; }
+
+  createPost() {
+    this.postService.createPost(this.newPostInfo).subscribe(
+      (general: General) => {
+        this.dialogService.showSuccessMessage(ESuccessType.INSERT).subscribe(() => {
+          this.router.navigate(["/admin/posts"])
+        });
+      }, error => {
+        this.dialogService.showErrorMessage(error);
       });
-    })    
+  }
+
+  modifyPost() {
+    this.postService.updatePost(this.newPostInfo).subscribe(
+      (generalt: General) => {
+        this.dialogService.showSuccessMessage(ESuccessType.MODIFY).subscribe(() => {
+          this.router.navigate(["/admin/posts"])
+        });
+      }, error => {
+        this.dialogService.showErrorMessage(error);
+      });
   }
 }

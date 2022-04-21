@@ -16,8 +16,12 @@
             "Además, hay un apartado de teoría dónde encontrareis un montón de páginas webs interesantes dónde informaros sobre las necesidades específicas de apoyo educativo de vuestro alumnado y cómo ayudarles."
         ],
         "details": {
-            "profile": ["¿Quien soy?"],
-            "resources": ["¿Quien soy?"],
+            "profile": [
+                "¿Quien soy?"
+            ],
+            "resources": [
+                "¿Quien soy?"
+            ],
             "diary": {
                 "title": "Diario",
                 "content": "Escribiré como si de un diario se tratase de mis experiencias con mis alumnos"
@@ -48,7 +52,7 @@
         "header": {
             "description": "Para trabajar..."
         },
-        "empty":{
+        "empty": {
             "title": "Recursos Vacíos",
             "description": "No se ha añadido ningún recurso de este tipo todavía. Vuelva a comprobarlo más tarde."
         },
@@ -72,16 +76,18 @@
     "diary": {
         "menu": "Diario",
         "header": {
-            "description": "Para trabajar..."
-        }
+            "description": "Historias cotidianas...",
+            "button": "Adentrarse"
+        },
+        "new": "Nuevo", 
+        "button": "Leer Más"
     },
     "contact": {
         "menu": "Contacto"
     },
-    "cookies":{
+    "cookies": {
         "message": "Este sitio utiliza cookies para mejorar la experiencia de usuario. Si continuas navegando considero que aceptas el uso de cookies."
     },
-    "publishedBy": "Publicado por",
     "privacyPolicy": {
         "footer": "Política de Privacidad",
         "title": "Política de Privacidad"
