@@ -8,7 +8,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "prod": "ng build --prod --base-href=\"./\"",
+    "prod": "ng build --prod",
     "commit.prod": "npm run prod && git add . && git commit -m \" New changes \" && git push origin master"
   },
   "private": true,
