@@ -1,0 +1,9 @@
+<div class="row">
+    <a *ngFor="let con of content" class="col-lg-4" [routerLink]="con.route">
+        <div class="card h-100 content">
+            <div class="card-body d-flex flex-column">
+                <h4 class="card-title">{{ con.title }}</h4>
+            </div>
+        </div>
+    </a>
+</div>

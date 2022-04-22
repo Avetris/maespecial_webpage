@@ -11,6 +11,7 @@ import { ManageResourcesComponent } from './@pages/admin/manage-resources/manage
 import { DiaryComponent } from './@pages/diary/diary.component';
 import { PostsComponent } from './@pages/admin/posts/posts.component';
 import { ProfileComponent } from './@pages/profile/profile.component';
+import { AdminComponent } from './@pages/admin/admin.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
@@ -34,7 +35,7 @@ const APP_ROUTES: Routes = [
     { path: 'privacy-policy', component: PrivacyPolicyComponent },
     {
         path: 'admin', children: [
-            { path: '', canActivate: [AuthGuard], component: CreatePostComponent },
+            { path: '', canActivate: [AuthGuard], component: AdminComponent },
             { path: 'login', component: LoginComponent },
             { path: 'resources', canActivate: [AuthGuard], component: ManageResourcesComponent },
             { path: 'posts', canActivate: [AuthGuard], component: PostsComponent },
