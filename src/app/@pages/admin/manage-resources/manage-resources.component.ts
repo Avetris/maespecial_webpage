@@ -56,6 +56,8 @@ var COLUMNS_SCHEDULE = [
   styleUrls: ['./manage-resources.component.scss']
 })
 export class ManageResourcesComponent {
+  loading: boolean
+
   displayedColumns: string[] = COLUMNS_SCHEDULE.map((col) => col.key);
   columnsSchema: any = COLUMNS_SCHEDULE
   dataSource = new MatTableDataSource<ResourceInfo>();
@@ -63,24 +65,29 @@ export class ManageResourcesComponent {
   constructor(private dialogService: DialogService, private resourceService: ResourceService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.resourceService.getResources().subscribe((data: ResourceInfo[]) => {
       this.dataSource.data = data;
+      this.loading = false;
     })
   }
 
   editRow(row: ResourceInfo) {
+    this.loading = true;
     if (row.id === -1)
     {
       this.resourceService.createResources(row).subscribe(
         (resource: ResourceInfo) => {
           row.id = resource.id;
           row.isEdit = false;
+          this.loading = false;
           this.dialogService.showSuccessMessage(ESuccessType.INSERT)
-        }, error => { this.dialogService.showErrorMessage(error); });
+        }, error => { this.dialogService.showErrorMessage(error); this.loading = false; });
     } else
     {
       this.resourceService.updateResources(row).subscribe(
         (general: General) => {
+          this.loading = false;
           if (general.status == 200)
           {
             row.isEdit = false
@@ -89,7 +96,7 @@ export class ManageResourcesComponent {
           {
             this.dialogService.showErrorMessage(`Status ${general.status}`);
           }
-        }, error => { this.dialogService.showErrorMessage(error); console.log });
+        }, error => { this.loading = true; this.dialogService.showErrorMessage(error); console.log(error); });
     }
   }
 
@@ -112,7 +119,9 @@ export class ManageResourcesComponent {
       .subscribe((confirm) => {
         if (confirm)
         {
+          this.loading = true;
           this.resourceService.deleteResources(id).subscribe((general: General) => {
+            this.loading = false;
             if (general.status == 200)
             {
               this.dataSource.data = this.dataSource.data.filter(
@@ -126,6 +135,7 @@ export class ManageResourcesComponent {
             }
           }, error => {
             this.dialogService.showErrorMessage(error);
+            this.loading = false;
           });
         }
       });
@@ -137,6 +147,7 @@ export class ManageResourcesComponent {
       .subscribe((confirm) => {
         if (confirm)
         {
+          this.loading = true;
           let errorMessage = null;
           resources.forEach(
             (res) => {
@@ -157,6 +168,7 @@ export class ManageResourcesComponent {
                 });
             }
           )
+          this.loading = false;
           if (!errorMessage) this.dialogService.showSuccessMessage(ESuccessType.REMOVE)
           else this.dialogService.showErrorMessage(errorMessage);
         }

@@ -9,6 +9,15 @@ export const HOME: Header =
     needHeader: true
 };
 
+export const PROFILE: Header =
+{
+    title: 'profile.header.description',
+    button: 'profile.header.button',
+    isButtonText: true,
+    bg: './assets/img/home-bg.jpg',
+    needHeader: true
+};
+
 export const DIARY: Header =
 {
     needHeader: false
@@ -56,41 +65,14 @@ export const RESOURCES_OWNCREATIONS: Header =
     needHeader: true
 };
 
-export const ABOUT: Header =
-{
-    title: 'about.title',
-    button: 'buttons.readMore',
-    isButtonText: true,
-    bg: './assets/img/home-bg.jpg',
-    needHeader: true
-};
-
 export const PRIVACY_POLICY: Header =
 {
     title: 'privacyPolicy.title',
     needHeader: false
 };
 
-export const COURSES: Header =
-{
-    title: 'courses.title',
-    button: 'buttons.readMore',
-    isButtonText: true,
-    bg: './assets/img/home-bg.jpg',
-    needHeader: true
-};
-
 export const CONTACT: Header =
 {
     title: 'contact.title',
     needHeader: false
-};
-
-export const PORTFOLIO: Header =
-{
-    title: 'portfolio.title',
-    button: 'buttons.readMore',
-    isButtonText: true,
-    bg: './assets/img/portfolio-bg.jpg',
-    needHeader: true
 };

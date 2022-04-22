@@ -1,55 +1,62 @@
-<div class="form">
-  <button *ngIf="currentPostInfo" mat-button (click)="revert('title')" [disabled]="disable('title')">Revertir
-    Titulo</button>
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Titulo</mat-label>
-    <input matInput [(ngModel)]="newPostInfo.title">
-  </mat-form-field>
-
-  <button *ngIf="currentPostInfo" mat-button (click)="revert('description')"
-    [disabled]="disable('description')">Revertir Desc</button>
-  <mat-form-field class="full-width" appearance="fill">
-    <mat-label>Descripción</mat-label>
-    <textarea matInput [(ngModel)]="newPostInfo.description"></textarea>
-  </mat-form-field>
-
-  <button *ngIf="currentPostInfo" mat-button (click)="revert('publishDate')"
-    [disabled]="disable('publishDate')">Revertir Fecha</button>
-  <mat-form-field class="full-width" appearance="fill">
-    <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [(ngModel)]="newPostInfo.publishDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <ngx-mat-datetime-picker #picker [showSpinners]="true" [stepHour]="1" [stepMinute]="1" [touchUi]="true">
-    </ngx-mat-datetime-picker>
-  </mat-form-field>
-</div>
-<div class="row">
-  <div class="column">
-    <h2>Imagen de Post</h2>
-    <input #fileInput class="form-control" type="file" accept="image/*" (change)="onChange($event)">
-    <button *ngIf="currentPostInfo" mat-button (click)="revertImage(fileInput)" [disabled]="disable('image')">Revertir
-      Imagen</button>
-  </div>
-  <div *ngIf="newPostInfo.image" class="column">
-    <img [src]="newPostInfo.image" style="height: 200px; width:150px">
+<div class="row" *ngIf="loading">
+  <div class="col-lg">
+    <app-loading></app-loading>
   </div>
 </div>
+<div *ngIf="!loading">
+  <div class="form">
+    <button *ngIf="currentPostInfo" mat-button (click)="revert('title')" [disabled]="disable('title')">Revertir
+      Titulo</button>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Titulo</mat-label>
+      <input matInput [(ngModel)]="newPostInfo.title">
+    </mat-form-field>
 
-<hr />
-<hr />
+    <button *ngIf="currentPostInfo" mat-button (click)="revert('description')"
+      [disabled]="disable('description')">Revertir Desc</button>
+    <mat-form-field class="full-width" appearance="fill">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput [(ngModel)]="newPostInfo.description"></textarea>
+    </mat-form-field>
+
+    <button *ngIf="currentPostInfo" mat-button (click)="revert('publishDate')"
+      [disabled]="disable('publishDate')">Revertir Fecha</button>
+    <mat-form-field class="full-width" appearance="fill">
+      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [(ngModel)]="newPostInfo.publishDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #picker [showSpinners]="true" [stepHour]="1" [stepMinute]="1" [touchUi]="true">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="column">
+      <h2>Imagen de Post</h2>
+      <input #fileInput class="form-control" type="file" accept="image/*" (change)="onChange($event)">
+      <button *ngIf="currentPostInfo" mat-button (click)="revertImage(fileInput)" [disabled]="disable('image')">Revertir
+        Imagen</button>
+    </div>
+    <div *ngIf="newPostInfo.image" class="column">
+      <img [src]="newPostInfo.image" style="height: 200px; width:150px">
+    </div>
+  </div>
+
+  <hr />
+  <hr />
 
 
-<button *ngIf="currentPostInfo" mat-button (click)="revert('content')" [disabled]="disable('content')">Revertir
-  Contenido</button>
-<quill-editor id="editor" [styles]="{minHeight: '400px'}" [modules]="modules" theme="snow" format="html"
-  (onEditorChanged)="changedEditor($event)" [(ngModel)]="newPostInfo.content">
-</quill-editor>
-<button mat-button (click)="currentPostInfo ? modifyPost() : createPost()"
-  [disabled]="disablePublish()">{{currentPostInfo ?
-  'Modificar' : 'Crear'}}</button>
+  <button *ngIf="currentPostInfo" mat-button (click)="revert('content')" [disabled]="disable('content')">Revertir
+    Contenido</button>
+  <quill-editor id="editor" [styles]="{minHeight: '400px'}" [modules]="modules" theme="snow" format="html"
+    (onEditorChanged)="changedEditor($event)" [(ngModel)]="newPostInfo.content">
+  </quill-editor>
+  <button mat-button (click)="currentPostInfo ? modifyPost() : createPost()"
+    [disabled]="disablePublish()">{{currentPostInfo ?
+    'Modificar' : 'Crear'}}</button>
 
-<div>
-  <h1>Cómo se verá el post:</h1>
-  <div class="ql-container ql-snow" style="border-width: 0;">
-    <div style="width: 100%" [innerHTML]="byPassHTML(newPostInfo.content)"></div>
+  <div>
+    <h1>Cómo se verá el post:</h1>
+    <div class="ql-container ql-snow" style="border-width: 0;">
+      <div style="width: 100%" [innerHTML]="byPassHTML(newPostInfo.content)"></div>
+    </div>
   </div>
 </div>

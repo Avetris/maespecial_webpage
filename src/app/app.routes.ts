@@ -6,14 +6,15 @@ import { CreatePostComponent } from './@pages/admin/create-post/create-post.comp
 import { HomeComponent } from './@pages/home/home.component';
 import { ResourcesComponent } from './@pages/resources/resources.component';
 import { ResourcesElementComponent } from './@pages/resources/element/resources-element.component';
-import { ContactComponent } from './@pages/contact/contact.component';
 import { PrivacyPolicyComponent } from './@pages/privacy-policy/privacy-policy.component';
 import { ManageResourcesComponent } from './@pages/admin/manage-resources/manage-resources.component';
 import { DiaryComponent } from './@pages/diary/diary.component';
 import { PostsComponent } from './@pages/admin/posts/posts.component';
+import { ProfileComponent } from './@pages/profile/profile.component';
 
 const APP_ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
+    { path: 'profile', component: ProfileComponent },
     {
         path: 'resources', children: [
             { path: '', component: ResourcesComponent },
@@ -29,7 +30,7 @@ const APP_ROUTES: Routes = [
             { path: ':id', component: DiaryComponent },
         ]
     },
-    { path: 'contact', component: ContactComponent },
+    // { path: 'contact', component: ContactComponent },
     { path: 'privacy-policy', component: PrivacyPolicyComponent },
     {
         path: 'admin', children: [

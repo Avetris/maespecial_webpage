@@ -26,6 +26,8 @@ Quill.register(DefaultSettingsBlock, true);
 })
 export class CreatePostComponent {
 
+  loading: boolean
+
   modules = {}
 
   newPostInfo: PostInfo = { id: -1, title!: null, description: null, image: null, content: "", publishDate: null };
@@ -48,8 +50,12 @@ export class CreatePostComponent {
     if (Number(post))
     {
       let postId = Number(post)
+      this.loading = true;
       this.postService.getPostData(postId).subscribe((post: PostInfo) => {
         this.setData(post);
+        this.loading = false;
+      }, error => {
+        this.loading = false;
       })
     }
   }
@@ -190,23 +196,29 @@ export class CreatePostComponent {
   revertImage(input) { this.newPostInfo.image = this.currentPostInfo.image; input.value = ''; }
 
   createPost() {
+    this.loading = true;
     this.postService.createPost(this.newPostInfo).subscribe(
       (general: General) => {
+        this.loading = false;
         this.dialogService.showSuccessMessage(ESuccessType.INSERT).subscribe(() => {
           this.router.navigate(["/admin/posts"])
         });
       }, error => {
+        this.loading = false;
         this.dialogService.showErrorMessage(error);
       });
   }
 
   modifyPost() {
+    this.loading = true;
     this.postService.updatePost(this.newPostInfo).subscribe(
       (generalt: General) => {
+        this.loading = false;
         this.dialogService.showSuccessMessage(ESuccessType.MODIFY).subscribe(() => {
           this.router.navigate(["/admin/posts"])
         });
       }, error => {
+        this.loading = false;
         this.dialogService.showErrorMessage(error);
       });
   }

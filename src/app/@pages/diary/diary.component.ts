@@ -16,7 +16,7 @@ export class DiaryComponent {
   loading: boolean;
 
   post: PostInfo
-  diary: PostInfo[];
+  diary: PostInfo[] = [];
   page: number = 0
   pageSize: number = 10
   length: number = 1
@@ -25,7 +25,6 @@ export class DiaryComponent {
     private translateService: TranslateConfigService,
     private postService: PostService,
     private router: Router) {
-    this.loading = true;
     config.updateDataSubject(DIARY);
 
     let post = this.router.url.split("/").pop();
@@ -33,6 +32,7 @@ export class DiaryComponent {
     if (Number(post))
     {
       let postId = Number(post)
+      this.loading = true;
       this.postService.getPostData(postId).subscribe((post: PostInfo) => {
         this.post = post;
         this.loading = false;
@@ -49,6 +49,7 @@ export class DiaryComponent {
   }
 
   getData(size, index) {
+    this.loading = true;
     this.postService.getPosts(size, index).subscribe((response: PostInfoList) => {
       console.log(response)
       this.diary = response.data;

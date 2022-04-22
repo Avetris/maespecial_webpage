@@ -1,22 +1,17 @@
-<div class="row" *ngIf="loading">
-  <div class="col-lg">
-    <app-loading></app-loading>
-  </div>
-</div>
-<div class="row" *ngIf="!loading">
+<div class="row">
   <div class="col-lg-8 col-md-10 mx-auto">
-      <h2>{{ 'home.title' | translate }}</h2>
-      <p *ngFor="let res of 'home.content' | translate | keyvalue">{{ res.value }}</p>
-      <div class="row">
-        <a *ngFor="let con of content" class="col-lg-4" [routerLink]="con.route">
-          <div class="card h-100 content">
-            <img class="card-img-top" [src]="con.image"/>
-            <div class="card-body d-flex flex-column">
-              <h4 class="card-title">{{ con.title | translate }}</h4>
-              <p class="card-text mt-auto">{{ con.description | translate }}</p>
-            </div>
+    <h2>{{ 'home.title' | translate }}</h2>
+    <p *ngFor="let res of 'home.content' | translate | keyvalue">{{ res.value }}</p>
+    <div class="row">
+      <a *ngFor="let con of content" class="col-lg-4" [routerLink]="con.route">
+        <div class="card h-100 content">
+          <img class="card-img-top" [src]="con.image" />
+          <div class="card-body d-flex flex-column">
+            <h4 class="card-title">{{ con.title | translate }}</h4>
+            <p class="card-text">{{ con.description | translate }}</p>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>

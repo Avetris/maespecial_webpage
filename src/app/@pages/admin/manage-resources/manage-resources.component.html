@@ -1,8 +1,13 @@
-<article class="table-header">
+<div class="row" *ngIf="loading">
+    <div class="col-lg">
+        <app-loading></app-loading>
+    </div>
+</div>
+<article class="table-header" *ngIf="!loading">
     <button class="button-remove-rows" mat-button (click)="removeSelectedRows()">Eliminar Filas Seleccionadas</button>
     <button class="button-add-row" mat-button (click)="addRow()">Añadir Fila</button>
 </article>
-<mat-table [dataSource]="dataSource">
+<mat-table [dataSource]="dataSource" *ngIf="!loading">
     <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
         <mat-header-cell *matHeaderCellDef> {{ col.label }} </mat-header-cell>
         <mat-cell *matCellDef="let element; let i = index">

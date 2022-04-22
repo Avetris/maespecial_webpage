@@ -1,4 +1,9 @@
-<div *ngIf="resourceData" class="container">
+<div class="row" *ngIf="loading">
+    <div class="col-lg">
+        <app-loading></app-loading>
+    </div>
+</div>
+<div *ngIf="resourceData && !loading" class="container">
     <p>{{ resourceData.description | translate}}</p>
     <div class="row" *ngIf="resourceData.data.length > 0 else empty_content">
         <ng-container *ngFor="let res of resourceData.data; index as i">
