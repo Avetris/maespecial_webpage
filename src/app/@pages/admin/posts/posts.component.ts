@@ -35,7 +35,7 @@ export class PostsComponent {
   }
 
   getData(pageSize, pageIndex) {
-    this.postService.getPosts(pageSize, pageIndex).subscribe((response: PostInfoList) => {
+    this.postService.getAllPosts(pageSize, pageIndex).subscribe((response: PostInfoList) => {
       console.log(response)
       this.diary = response.data;
       this.page = response.meta.page;

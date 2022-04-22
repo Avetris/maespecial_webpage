@@ -8,6 +8,10 @@ import { DataService } from './data.service';
   providedIn: 'root'
 })
 export class PostService extends DataService {
+  
+  public getAllPosts(pageSize: number, page = 1): Observable<PostInfoList> {
+    return this.http.get<PostInfoList>(`${this.adminPath}/posts?pageSize=${pageSize}&page=${page}`);
+  }
 
   public getPosts(pageSize: number, page = 1): Observable<PostInfoList> {
     return this.http.get<PostInfoList>(`${this.anonyPath}/posts?pageSize=${pageSize}&page=${page}`);
