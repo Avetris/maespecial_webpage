@@ -16,12 +16,14 @@
             "Además, hay un apartado de teoría dónde encontrareis un montón de páginas webs interesantes dónde informaros sobre las necesidades específicas de apoyo educativo de vuestro alumnado y cómo ayudarles."
         ],
         "details": {
-            "profile": [
-                "¿Quien soy?"
-            ],
-            "resources": [
-                "¿Quien soy?"
-            ],
+            "profile": {
+                "title": "¿Quien soy?",
+                "content": "Descripción de quien soy"
+            },
+            "resources": {
+                "title": "Recursos",
+                "content": "Recursos de compañer@s, teóricos, comerciales y creaciones propias"
+            },
             "diary": {
                 "title": "Diario",
                 "content": "Escribiré como si de un diario se tratase de mis experiencias con mis alumnos"
@@ -34,6 +36,7 @@
             "description": "¿Quien soy?",
             "button": "Ver"
         },
+        "title": "¿Quien soy?",
         "content": [
             "¡Hola! Yo soy Andrea, una joven maestra PT que comienza un nuevo proyecto.",
             "El objetivo que tengo para esta página es el de dar a conocer a otras maestras y maestros que cuelgan sus materiales en las redes sociales e ir colgando mis propios materiales, que he diseñado para mis alumnos y voy haciendo poniendo en práctica, para mostrar ideas a mis compañeros y compañeras.",
@@ -79,7 +82,11 @@
             "description": "Historias cotidianas...",
             "button": "Adentrarse"
         },
-        "new": "Nuevo", 
+        "empty": {
+            "title": "Diario Vacíos",
+            "description": "No se ha añadido ninguna entrada al diario todavía. Vuelva a comprobarlo más tarde."
+        },
+        "new": "Nuevo",
         "button": "Leer Más"
     },
     "contact": {

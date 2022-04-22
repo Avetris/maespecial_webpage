@@ -31,9 +31,5 @@
                 "textName": "resources.menu.ownCreation"
             }
         ]
-    },
-    {
-        "routeName": "/contact",
-        "textName": "contact.menu"
     }
 ]
