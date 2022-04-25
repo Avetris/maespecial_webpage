@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col-lg-8 col-md-10 mx-auto">
+  <img class="container_image" src="/assets/img/profile_vertical.jpg" />
+  <div class="col-lg-8 col-md-10 mx-auto container_text">
     <h2>{{ 'profile.title' | translate }}</h2>
     <p *ngFor="let res of 'profile.content' | translate | keyvalue">{{ res.value }}</p>
   </div>

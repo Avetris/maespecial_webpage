@@ -31,6 +31,7 @@ export class PostsComponent {
   }
 
   changePage(event) {
+    console.log("changePage")
     this.getData(event.pageSize, event.pageIndex);
   }
 

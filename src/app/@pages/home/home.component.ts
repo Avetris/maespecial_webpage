@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   content = [{
-    "image": "./assets/img/resources/main.jpg",
+    "image": "./assets/img/profile_horizontal.jpg",
     "title": "home.details.profile.title",
     "description": "home.details.profile.content",
     "route": "/profile",

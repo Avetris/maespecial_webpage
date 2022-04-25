@@ -47,7 +47,7 @@
   <button *ngIf="currentPostInfo" mat-button (click)="revert('content')" [disabled]="disable('content')">Revertir
     Contenido</button>
   <quill-editor id="editor" [styles]="{minHeight: '400px'}" [modules]="modules" theme="snow" format="html"
-    (onEditorChanged)="changedEditor($event)" [(ngModel)]="newPostInfo.content">
+   [(ngModel)]="newPostInfo.content">
   </quill-editor>
   <button mat-button (click)="currentPostInfo ? modifyPost() : createPost()"
     [disabled]="disablePublish()">{{currentPostInfo ?

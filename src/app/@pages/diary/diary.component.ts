@@ -51,7 +51,6 @@ export class DiaryComponent {
   getData(size, index) {
     this.loading = true;
     this.postService.getPosts(size, index).subscribe((response: PostInfoList) => {
-      console.log(response)
       this.diary = response.data;
       this.page = response.meta.page;
       this.pageSize = response.meta.pageSize;

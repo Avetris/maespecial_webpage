@@ -8,7 +8,7 @@ export interface Config {
 export interface QuillInstance {
   on: any
   getText: any
-}
+} 
 
 export default class Counter {
   quill: QuillInstance

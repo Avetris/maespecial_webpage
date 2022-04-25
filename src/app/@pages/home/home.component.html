@@ -5,7 +5,7 @@
     <div class="row">
       <a *ngFor="let con of content" class="col-lg-4" [routerLink]="con.route">
         <div class="card h-100 content">
-          <img class="card-img-top" [src]="con.image" />
+          <img class="card-img-top card-img" [src]="con.image" />
           <div class="card-body d-flex flex-column">
             <h4 class="card-title">{{ con.title | translate }}</h4>
             <p class="card-text">{{ con.description | translate }}</p>

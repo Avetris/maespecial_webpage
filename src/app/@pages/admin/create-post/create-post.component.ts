@@ -155,10 +155,6 @@ export class CreatePostComponent {
     return this.sanitizer.bypassSecurityTrustHtml(html)
   }
 
-  changedEditor(event: EditorChangeContent | EditorChangeSelection) {
-    this.newPostInfo.content = event.editor.root.innerHTML
-  }
-
   onChange(event) {
 
     const reader = new FileReader();

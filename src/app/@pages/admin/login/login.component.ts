@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
         });
 
         // get return url from route parameters or default to '/'
-        console.log(this.route.snapshot.queryParams['redirect'])
         this.returnUrl = this.route.snapshot.queryParams['redirect'] || '/admin';
     }
 

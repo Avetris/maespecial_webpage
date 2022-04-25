@@ -28,7 +28,8 @@
         </div>
     </div>
 </div>
-<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page">
+<mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"
+(page)="changePage($event)">
 </mat-paginator>
 
 <div class="row" *ngIf="!loading && post" [innerHTML]="post.content">

@@ -1,3 +1,18 @@
 h2 {
-    font-family: 'Vogue' ;
+    font-family: "Vogue";
+}
+
+.row {
+    padding: 20px 40px 40px;
+}
+
+.container_image {
+    width: 250px;
+    height: 450px;
+    margin: 60px 30px 30px 0;
+    float: left;
+}
+
+.container_text {
+    display: inline;
 }
