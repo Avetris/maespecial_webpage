@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { YoutubePipe } from './@core/pipes/youtube.pipe';
 import { DomSecurePipe } from './@core/pipes/dom-secure.pipe';
 import { SidebarModule } from './@core/components/sidebar/sidebar.module';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { TranslateCustomModule } from './@core/modules/translate-custom.module';
@@ -27,6 +27,9 @@ import { ConfirmDialogComponent } from './@core/components/confirm-dialog/confir
 import { MessageDialogComponent } from './@core/components/message-dialog/message-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import localeES from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeES, 'es')
 
 const COMPONENTS = [
   AppComponent
@@ -66,7 +69,7 @@ const PIPES = [
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
   exports: [TranslateCustomModule, ReactiveFormsModule],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService, {provide: LOCALE_ID, useValue: 'es'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

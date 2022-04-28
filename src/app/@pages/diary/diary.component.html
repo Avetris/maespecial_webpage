@@ -18,8 +18,9 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <h2 class="card-title">{{post.title}}</h2>
-                                    <p class="post-meta" *ngIf="showNew(post.publishDate)">
+                                    <p class="post-meta publishDate" *ngIf="showNew(post.publishDate)">
                                         <span style="background:#219E46;">{{ 'diary.new' | translate}}</span>
+                                        {{ 'diary.by' | translate}} Andrea, {{ post.publishDate | date: 'MMMM d, y, h:mm a' }}
                                     </p>
                                     <p class="card-text">{{post.description}}</p>
                                     <a [routerLink]="'/diary/' + post.id" class="btn btn-primary float-right">{{
@@ -37,7 +38,10 @@
             </mat-paginator>
         </div>
     </div>
-    <div class="row" *ngIf="post" [innerHTML]="post.content">
+    <div *ngIf="post">
+        <h1 class="title">{{post.title}}</h1>
+        <div class="row" [innerHTML]="post.content"></div>
+        <p class="publishDate">{{ 'diary.by' | translate}} Andrea, {{ post.publishDate | date: 'MMMM d, y, h:mm a' }}</p>
     </div>
 </div>
 

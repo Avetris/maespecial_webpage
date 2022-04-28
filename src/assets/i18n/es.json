@@ -87,7 +87,8 @@
             "description": "No se ha añadido ninguna entrada al diario todavía. Vuelva a comprobarlo más tarde."
         },
         "new": "Nuevo",
-        "button": "Leer Más"
+        "button": "Leer Más",
+        "by": "Por"
     },
     "contact": {
         "menu": "Contacto"
