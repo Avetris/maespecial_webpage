@@ -5,7 +5,7 @@ export const HOME: Header =
     title: 'home.header.description',
     button: 'home.header.button',
     isButtonText: true,
-    bg: './assets/img/home-bg.jpg',
+    bg: './assets/img/home.jpg',
     needHeader: true
 };
 
@@ -15,7 +15,7 @@ export const PROFILE: Header =
     button: 'profile.header.button',
     isButtonText: true,
     bg: './assets/img/home-bg.jpg',
-    needHeader: true
+    needHeader: false
 };
 
 export const DIARY: Header =

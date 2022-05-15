@@ -17,8 +17,8 @@
         ],
         "details": {
             "profile": {
-                "title": "¿Quien soy?",
-                "content": "Descripción de quien soy"
+                "title": "¿Quién soy?",
+                "content": "Descripción de Quién soy"
             },
             "resources": {
                 "title": "Recursos",
@@ -31,11 +31,7 @@
         }
     },
     "profile": {
-        "menu": "¿Quien soy?",
-        "header": {
-            "description": "¿Quien soy?",
-            "button": "Ver"
-        },
+        "menu": "Conóceme",
         "title": "¿Quien soy?",
         "content": [
             "¡Hola! Yo soy Andrea, una joven maestra PT que comienza un nuevo proyecto.",

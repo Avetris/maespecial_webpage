@@ -1,5 +1,6 @@
 import { ConfigService } from 'src/app/@core/services/config.service';
-import { Component, DebugElement, ViewEncapsulation  } from '@angular/core';
+import { Component, ViewEncapsulation  } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
 // Declaramos las variables para jQuery
 declare var $: any;
 
@@ -14,7 +15,7 @@ export class HeaderComponent {
   title: string;
   btntitle: string;
   needHeader: boolean
-  constructor(private config: ConfigService) {
+  constructor(private config: ConfigService, private scroller: ViewportScroller) {
     this.config.bgVar$.subscribe( data => {
       this.bgUrl = data;
     });
@@ -70,5 +71,11 @@ export class HeaderComponent {
         }
       }
     }
+  }
+
+  goDown()
+  {
+    this.scroller.setOffset([0, 100]);
+    this.scroller.scrollToAnchor("body");
   }
 }
