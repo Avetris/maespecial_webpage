@@ -21,9 +21,9 @@ export class PostService extends DataService {
     return this.http.get<PostInfo>(`${this.anonyPath}/post/${postId}`);
   }
 
-  public uploadPostImage(data: FormData): Promise<FileUpload> {
+ /* public uploadPostImage(data: FormData): Promise<FileUpload> {
     return this.http.post<FileUpload>(`${this.adminPath}/upload`, data, { withCredentials: true }).toPromise()
-  }
+  }*/
 
   public createPost(post: PostInfo): Observable<General> {
     return this.http.post<General>(`${this.adminPath}/post`, post, { withCredentials: true });

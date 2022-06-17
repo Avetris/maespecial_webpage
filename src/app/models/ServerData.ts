@@ -5,8 +5,15 @@ export class ResourceInfo {
     instagram!: string
     web!: string
     showDate!: Date
+    images!: ResourceImageInfo[]
     isEdit!: boolean
     isSelected!: boolean
+}
+
+export class ResourceImageInfo {
+    resource_id!: number
+    image_id!: string
+    image_path!: string
 }
 
 export class PostInfo {
@@ -17,7 +24,6 @@ export class PostInfo {
     content!: string
     publishDate!: Date
 }
-
 
 export class PostInfoList {
     data: PostInfo[]

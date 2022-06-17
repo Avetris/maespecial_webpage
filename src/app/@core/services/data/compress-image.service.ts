@@ -17,7 +17,7 @@ export class CompressImageService {
         const reader = new FileReader()
         reader.readAsDataURL(file)
 
-        return Observable.create(observer => {
+        return new Observable(observer => {
             // This event is triggered each time the reading operation is successfully completed.
             reader.onload = ev => {
                 // Create an html image element

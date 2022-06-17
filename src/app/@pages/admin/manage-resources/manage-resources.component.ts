@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ResourceService } from 'src/app/@core/services/data/resources.service';
-import { General, ResourceInfo } from 'src/app/models/ServerData';
+import { General, ResourceImageInfo, ResourceInfo } from 'src/app/models/ServerData';
 import { MatTableDataSource } from '@angular/material/table';
 import { DialogService, ESuccessType } from 'src/app/@core/services/dialog.service';
+import { take } from 'rxjs/operators';
+import { CompressImageService } from 'src/app/@core/services/data/compress-image.service';
 
 var COLUMNS_SCHEDULE = [
   {
@@ -17,7 +19,7 @@ var COLUMNS_SCHEDULE = [
       companions: "Compañeros",
       commercials: "Comerciales",
       theories: "Teóricos",
-      ownCreation: "Creación Propia"
+      ownCreations: "Creación Propia"
     },
     label: 'Tipo',
     required: true
@@ -57,12 +59,19 @@ var COLUMNS_SCHEDULE = [
 })
 export class ManageResourcesComponent {
   loading: boolean
+  rowImageEditing: ResourceInfo;
+  newImage: ResourceImageInfo
+  compressingImage: boolean = false;
 
   displayedColumns: string[] = COLUMNS_SCHEDULE.map((col) => col.key);
   columnsSchema: any = COLUMNS_SCHEDULE
   dataSource = new MatTableDataSource<ResourceInfo>();
   valid: any = {};
-  constructor(private dialogService: DialogService, private resourceService: ResourceService) { }
+  constructor(
+    private dialogService: DialogService,
+    private resourceService: ResourceService,
+    private compressImage: CompressImageService,
+    private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.loading = true;
@@ -108,6 +117,7 @@ export class ManageResourcesComponent {
       instagram: '',
       web: '',
       showDate: null,
+      images: [],
       isEdit: true,
       isSelected: false,
     };
@@ -177,5 +187,89 @@ export class ManageResourcesComponent {
 
   disableSubmit(index: number) {
     return !this.dataSource.data[index].name || !this.dataSource.data[index].type;
+  }
+
+  editImage(row: ResourceInfo) {
+    this.newImage = {
+      resource_id: row.id,
+      image_id: null,
+      image_path: null
+    };
+    this.rowImageEditing = row;
+  }
+
+  stopEditImage() {
+    this.newImage = null;
+    this.rowImageEditing = null;
+  }
+
+  onChange(event) {
+    this.newImage.image_path = null;
+
+    this.compressingImage = true;
+
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length)
+    {
+      const imageFile = event.target.files[0];
+      this.compressImage.compress(imageFile).pipe(take(1))
+        .subscribe((compressedImage: File) => {
+          reader.readAsDataURL(compressedImage);
+          reader.onload = () => {
+            this.compressingImage = false;
+            this.newImage.image_path = reader.result as string;
+            this.ref.detectChanges();
+          };
+        });
+    }
+  }
+
+  addImage() {
+    this.loading = true;
+    this.resourceService.updateResourceImage(this.newImage).subscribe(
+      (resourceImageInfo: ResourceImageInfo) => {
+        this.newImage = {
+          resource_id: this.rowImageEditing.id,
+          image_id: null,
+          image_path: null
+        };
+        this.rowImageEditing.images.push(resourceImageInfo)
+        this.loading = false;
+        this.dialogService.showSuccessMessage(ESuccessType.INSERT);
+      }, error => {
+        this.loading = false;
+        this.dialogService.showErrorMessage(error);
+    });
+  }
+
+  removeImage(resourceImageInfo: ResourceImageInfo) {
+    resourceImageInfo.resource_id = this.rowImageEditing.id;
+    this.dialogService.showConfirmDialog()
+      .subscribe((confirm) => {
+        if (confirm)
+        {
+          this.loading = true;
+          this.resourceService.deleteResourceImage(resourceImageInfo).subscribe(
+            (general: General) => {
+              if (general.status == 200)
+              {
+                this.rowImageEditing.images = this.rowImageEditing.images.filter(
+                  (r: ResourceImageInfo) => r.image_id !== resourceImageInfo.image_id
+                );
+                this.loading = false;
+                this.dialogService.showSuccessMessage(ESuccessType.REMOVE);
+              }
+              else
+              {
+                this.loading = false;
+                this.dialogService.showErrorMessage(`Status ${general.status} for ${resourceImageInfo.image_id}`)
+              }
+            }, error => {
+              this.loading = false;
+              this.dialogService.showErrorMessage(error)
+            });
+        }
+      });
   }
 }

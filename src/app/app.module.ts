@@ -23,6 +23,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view'; // ng-image-fullscreen-view
 import { ConfirmDialogComponent } from './@core/components/confirm-dialog/confirm-dialog.component';
 import { MessageDialogComponent } from './@core/components/message-dialog/message-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -65,6 +66,7 @@ const PIPES = [
     NgxMatTimepickerModule,
     MatNativeDateModule,
     NgxMatMomentModule,
+    NgImageFullscreenViewModule,
     MatTooltipModule,
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],

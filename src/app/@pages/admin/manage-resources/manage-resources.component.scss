@@ -68,6 +68,15 @@ h2 {
     margin-right: 5px;
 }
 
+.button-back-rows {
+    background: black;
+    color: #ffffff;
+}
+
+.button-images {
+    color: green;
+}
+
 .button-remove {
     color: red;
 }
@@ -102,7 +111,28 @@ mat-row {
     align-items: stretch;
 }
 
-mat-header-cell{  
+mat-header-cell {
     font-size: 15px;
     font-weight: bold;
+}
+
+.button-remove-image {
+    background-color: red;
+    color: #ffffff;
+    margin: 20px;
+}
+
+.image-row {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.image-row > img {
+    max-height: 50vw; 
+    max-width:50vw; 
+}
+
+.button-add-image {
+    background-color: green;
+    color: #ffffff;
 }

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import 'quill-emoji/dist/quill-emoji.js';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -40,7 +39,8 @@ export class CreatePostComponent {
     private router: Router,
     private sanitizer: DomSanitizer,
     private postService: PostService,
-    private compressImage: CompressImageService) {
+    private compressImage: CompressImageService,
+    private ref: ChangeDetectorRef) {
     this.addFonts();
 
     this.createQuillModules();
@@ -139,6 +139,7 @@ export class CreatePostComponent {
                         var base64result = reader.result;
                         const range = this.quill.getSelection();
                         this.quill.insertEmbed(range.index, 'customImage', { url: base64result, alt: file.name });
+                        // this.ref.detectChanges();
                       }
                     }.bind(this)
                   });
@@ -168,6 +169,7 @@ export class CreatePostComponent {
           reader.onload = () => {
             this.newPostInfo.image = reader.result as string;
           };
+          this.ref.detectChanges();
         });
     }
   }
@@ -208,7 +210,7 @@ export class CreatePostComponent {
   modifyPost() {
     this.loading = true;
     this.postService.updatePost(this.newPostInfo).subscribe(
-      (generalt: General) => {
+      (general: General) => {
         this.loading = false;
         this.dialogService.showSuccessMessage(ESuccessType.MODIFY).subscribe(() => {
           this.router.navigate(["/admin/posts"])

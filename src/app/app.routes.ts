@@ -41,8 +41,8 @@ const APP_ROUTES: Routes = [
             { path: 'posts', canActivate: [AuthGuard], component: PostsComponent },
             {
                 path: 'change-post', children: [
-                    { path: '', component: CreatePostComponent },
-                    { path: ':id', component: CreatePostComponent },
+                    { path: '', canActivate: [AuthGuard], component: CreatePostComponent },
+                    { path: ':id', canActivate: [AuthGuard], component: CreatePostComponent },
                 ]
             },
             { path: '**', pathMatch: 'full', redirectTo: '' },

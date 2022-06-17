@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageInfo } from 'src/app/models/PageInfo';
-import { ResourceInfo, General } from 'src/app/models/ServerData';
+import { ResourceInfo, General, ResourceImageInfo } from 'src/app/models/ServerData';
 import { DataService } from './data.service';
 
 @Injectable({
@@ -33,6 +33,16 @@ export class ResourceService extends DataService {
   public deleteResources(id: number): Observable<General>
   {      
     return this.http.delete<General>(`${this.adminPath}/resources/${id}`, {withCredentials: true});
+  }
+  
+  public updateResourceImage(resourceImage: ResourceImageInfo): Observable<ResourceImageInfo>
+  {      
+    return this.http.post<ResourceImageInfo>(`${this.adminPath}/resources_image`, resourceImage, {withCredentials: true});
+  }
+
+  public deleteResourceImage(resourceImage: ResourceImageInfo): Observable<General>
+  {      
+    return this.http.delete<General>(`${this.adminPath}/resources_image`, {body: resourceImage, withCredentials: true});
   }
 }
 

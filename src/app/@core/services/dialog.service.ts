@@ -27,11 +27,11 @@ export class DialogService {
       title: "Exito",
       description: message
     }
+    dialogConfig.autoFocus = true;
     return this.dialog.open(MessageDialogComponent, dialogConfig).afterClosed();
   }
 
   public showErrorMessage(error: any) {
-    console.log(error);
     const dialogConfig = new MatDialogConfig()
     dialogConfig.data = {
       title: "Error",
