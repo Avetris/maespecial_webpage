@@ -43,7 +43,7 @@ export const RESOURCES_THEORIES: Header =
     title: 'resources.header.description',
     button: 'resources.menu.theories',
     isButtonText: true,
-    bg: './assets/img/resources/theories.jpg',
+    bg: './assets/img/resources/theories.png',
     needHeader: true
 };
 
