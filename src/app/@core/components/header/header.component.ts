@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { TimeInterval } from 'rxjs';
 import { TranslateConfigService } from '../../services/translate-config.service';
+import { LoginComponent } from 'src/app/@pages/admin/login/login.component';
 // Declaramos las variables para jQuery
 declare var $: any;
 
@@ -20,19 +21,12 @@ export class HeaderComponent {
   letterColorInterval: NodeJS.Timer;
   constructor(
     private config: ConfigService,
-    private translateService: TranslateConfigService,
     private scroller: ViewportScroller) {
     this.config.bgVar$.subscribe(data => {
       this.bgUrl = data;
     });
     this.config.titleVar$.subscribe(data => {
-      this.translateService.getStringByLabel(data).subscribe(text => {
-        this.title = text;
-        if(this.needHeader)
-        {          
-          this.getText();
-        }
-      });
+        this.title = data;
     });
     this.config.btnTitlVar$.subscribe(data => {
       this.btntitle = data;
@@ -44,6 +38,7 @@ export class HeaderComponent {
 
 
   public getText() {
+    if(!this.needHeader) return;
     let animatedTitle = $(".animated-title");
     let child = animatedTitle.lastElementChild;
     while (child) {
@@ -51,8 +46,12 @@ export class HeaderComponent {
       child = animatedTitle.lastElementChild;
     }
 
-    var text = this.title;
-    animatedTitle.text("");
+    while($(".animated-title").text())
+
+    console.log()
+    var text = animatedTitle.text();
+   // animatedTitle.text("");
+    console.log(text);
 
     var em = $('<em class="caption-title-word"></em>');
 
@@ -67,7 +66,7 @@ export class HeaderComponent {
     this.changeLettersColor();
     if (this.letterColorInterval != undefined)
       clearInterval(this.letterColorInterval);
-    this.letterColorInterval = setInterval(this.changeLettersColor, 3000);
+      this.letterColorInterval = setInterval(this.changeLettersColor, 3000);
   }
 
   changeLettersColor() {
