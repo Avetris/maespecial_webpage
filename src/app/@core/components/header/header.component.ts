@@ -25,6 +25,7 @@ export class HeaderComponent {
       this.bgUrl = data;
     });
     this.config.titleVar$.subscribe(data => {
+      if(data == null) return;
       translateService.getStringByLabel(data).subscribe(text => {
         this.getText(text);
       });
@@ -33,13 +34,14 @@ export class HeaderComponent {
       this.btntitle = data;
     });
     this.config.needHeaderVar$.subscribe(data => {
+      console.log("needHeader", data)
       this.needHeader = data;
     });
   }
 
 
   public getText(text) {
-    if(!this.needHeader) return;
+    console.log(text);
     $(".animated-title").empty();
 
     var em = $('<em class="caption-title-word"></em>');
@@ -50,12 +52,14 @@ export class HeaderComponent {
       span.append('<span class="cry-double" style="animation-delay: 0s;">' + text[i] + '</span>');
       em.append(span);
     }
+    console.log(em);
     $(".animated-title").append(em);
 
     this.changeLettersColor();
-    if (this.letterColorInterval != undefined)
+    if (this.letterColorInterval != undefined){
       clearInterval(this.letterColorInterval);
-      this.letterColorInterval = setInterval(this.changeLettersColor, 3000);
+    }
+    this.letterColorInterval = setInterval(this.changeLettersColor, 3000);
   }
 
   changeLettersColor() {

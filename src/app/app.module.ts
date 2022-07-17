@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { YoutubePipe } from './@core/pipes/youtube.pipe';
 import { DomSecurePipe } from './@core/pipes/dom-secure.pipe';
 import { SidebarModule } from './@core/components/sidebar/sidebar.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -37,7 +36,6 @@ const COMPONENTS = [
 ];
 
 const PIPES = [
-  YoutubePipe,
   DomSecurePipe
 ];
 

@@ -11,10 +11,6 @@ export const HOME: Header =
 
 export const PROFILE: Header =
 {
-    title: 'profile.header.description',
-    button: 'profile.header.button',
-    isButtonText: true,
-    bg: './assets/img/home-bg.jpg',
     needHeader: false
 };
 
