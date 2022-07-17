@@ -22,10 +22,10 @@ export class ConfigService {
   public needHeaderVar$ = this.needHeaderVar.asObservable();
 
   public updateDataSubject(data: Header) {
+    this.needHeaderVar.next(data.needHeader);
+    this.isButtonTextVar.next(data.isButtonText);
+    this.buttonTitleVar.next(data.button);
     this.bgVar.next(data.bg);
     this.titleVar.next(data.title);
-    this.buttonTitleVar.next(data.button);
-    this.isButtonTextVar.next(data.isButtonText);
-    this.needHeaderVar.next(data.needHeader);
   }
 }

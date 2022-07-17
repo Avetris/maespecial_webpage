@@ -1,6 +1,8 @@
 import { ConfigService } from 'src/app/@core/services/config.service';
-import { Component, ViewEncapsulation  } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
+import { TimeInterval } from 'rxjs';
+import { TranslateConfigService } from '../../services/translate-config.service';
 // Declaramos las variables para jQuery
 declare var $: any;
 
@@ -15,66 +17,75 @@ export class HeaderComponent {
   title: string;
   btntitle: string;
   needHeader: boolean
-  constructor(private config: ConfigService, private scroller: ViewportScroller) {
-    this.config.bgVar$.subscribe( data => {
+  letterColorInterval: NodeJS.Timer;
+  constructor(
+    private config: ConfigService,
+    private translateService: TranslateConfigService,
+    private scroller: ViewportScroller) {
+    this.config.bgVar$.subscribe(data => {
       this.bgUrl = data;
     });
-    this.config.titleVar$.subscribe( data => {
-      this.title = data;
+    this.config.titleVar$.subscribe(data => {
+      this.translateService.getStringByLabel(data).subscribe(text => {
+        this.title = text;
+        if(this.needHeader)
+        {          
+          this.getText();
+        }
+      });
     });
-    this.config.btnTitlVar$.subscribe( data => {
+    this.config.btnTitlVar$.subscribe(data => {
       this.btntitle = data;
     });
-    this.config.needHeaderVar$.subscribe( data => {
+    this.config.needHeaderVar$.subscribe(data => {
       this.needHeader = data;
-      if(this.needHeader)
-      {
-        $(window).on('load', function () {
-          setTimeout(getText, 1);
-        });      
-      }
     });
+  }
 
-    function getText()
-    {
-      var text = $(".animated-title").text();
-       $(".animated-title").text("");
 
-      var em = $('<em class="caption-title-word"></em>');
-
-      for (var i = 0; i < text.length; i++) {
-        var span = $('<span class="title-header"></span></span>');
-        span.append('<span class="cry-single" style="animation-delay: 0s;">' + text[i] + '</span>');
-        span.append('<span class="cry-double" style="animation-delay: 0s;">' + text[i] + '</span>');
-        em.append(span);
-      }
-      $(".animated-title").append(em);
-
-      changeLettersColor();
-      setInterval(changeLettersColor, 3000);
+  public getText() {
+    let animatedTitle = $(".animated-title");
+    let child = animatedTitle.lastElementChild;
+    while (child) {
+      animatedTitle.removeChild(child);
+      child = animatedTitle.lastElementChild;
     }
 
-    function changeLettersColor()
-    {
-      $(".animated-letter").removeClass("animated-letter").css( 'animation-delay', '0s' );
-      var elements = $(".title-header").toArray();
-      var numItems = Math.floor((Math.random() * (4 - 1)) + 1);
-      while(numItems > 0)
-      {
-        var index = Math.floor((Math.random() * (elements.length - 1)) + 1);
-        var elem = $(elements[index]);
-        if(elem.text() != " ")
-        {
-          $(elem).children().addClass("animated-letter").css( 'animation-delay', '0ms' );
-          elements.splice(index, 1);
-          numItems--;
-        }
+    var text = this.title;
+    animatedTitle.text("");
+
+    var em = $('<em class="caption-title-word"></em>');
+
+    for (var i = 0; i < text.length; i++) {
+      var span = $('<span class="title-header"></span></span>');
+      span.append('<span class="cry-single" style="animation-delay: 0s;">' + text[i] + '</span>');
+      span.append('<span class="cry-double" style="animation-delay: 0s;">' + text[i] + '</span>');
+      em.append(span);
+    }
+    animatedTitle.append(em);
+
+    this.changeLettersColor();
+    if (this.letterColorInterval != undefined)
+      clearInterval(this.letterColorInterval);
+    this.letterColorInterval = setInterval(this.changeLettersColor, 3000);
+  }
+
+  changeLettersColor() {
+    $(".animated-letter").removeClass("animated-letter").css('animation-delay', '0s');
+    var elements = $(".title-header").toArray();
+    var numItems = Math.floor((Math.random() * (4 - 1)) + 1);
+    while (numItems > 0) {
+      var index = Math.floor((Math.random() * (elements.length - 1)) + 1);
+      var elem = $(elements[index]);
+      if (elem.text() != " ") {
+        $(elem).children().addClass("animated-letter").css('animation-delay', '0ms');
+        elements.splice(index, 1);
+        numItems--;
       }
     }
   }
 
-  goDown()
-  {
+  goDown() {
     this.scroller.setOffset([0, 100]);
     this.scroller.scrollToAnchor("body");
   }
