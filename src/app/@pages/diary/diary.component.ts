@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { DIARY } from 'src/app/@core/components/header/header.constants';
 import { ConfigService } from 'src/app/@core/services/config.service';
@@ -24,7 +25,8 @@ export class DiaryComponent {
   constructor(config: ConfigService,
     private translateService: TranslateConfigService,
     private postService: PostService,
-    private router: Router) {
+    private router: Router,
+    private sanitizer: DomSanitizer) {
     config.updateDataSubject(DIARY);
 
     let post = this.router.url.split("/").pop();
@@ -42,6 +44,11 @@ export class DiaryComponent {
     {
       this.getData(this.pageSize, this.page);
     }
+  }
+
+  getSanitizier()
+  {
+    return this.sanitizer.bypassSecurityTrustHtml(this.post.content);
   }
 
   changePage(event) {

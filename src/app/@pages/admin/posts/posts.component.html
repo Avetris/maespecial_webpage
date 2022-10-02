@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-3">
-                        <a href="#">
+                        <a [routerLink]="['/admin/change-post/', post.id]">
                             <img class="img-fluid rounded" [src]="post.image" />
                         </a>
                     </div>
@@ -17,7 +17,7 @@
                         <h2 class="card-title">{{post.title}}</h2>
                         <p class="post-meta" *ngIf="showNew(post.publishDate)">
                             <span style="background:#219E46;">{{ 'diary.new' | translate}}</span>
-                            {{ post.publishDate }}
+                        {{ post.publishDate | date: 'MMMM d, y, H:mm' | titlecase }}
                         </p>
                         <p class="card-text">{{post.description}}</p>
                         <a [routerLink]="['/admin/change-post/', post.id]" class="btn btn-primary float-right">Editar &rarr;</a>

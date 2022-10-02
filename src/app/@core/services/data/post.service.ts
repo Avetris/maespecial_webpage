@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FileUpload } from 'src/app/models/FileUpload';
 import { General, PostInfo, PostInfoList } from 'src/app/models/ServerData';
 import { DataService } from './data.service';
 

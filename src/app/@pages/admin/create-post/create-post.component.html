@@ -13,7 +13,7 @@
     </mat-form-field>
 
     <button *ngIf="currentPostInfo" mat-button (click)="revert('description')"
-      [disabled]="disable('description')">Revertir Desc</button>
+      [disabled]="disable('description')">Revertir Descripción</button>
     <mat-form-field class="full-width" appearance="fill">
       <mat-label>Descripción</mat-label>
       <textarea matInput [(ngModel)]="newPostInfo.description"></textarea>
@@ -22,7 +22,7 @@
     <button *ngIf="currentPostInfo" mat-button (click)="revert('publishDate')"
       [disabled]="disable('publishDate')">Revertir Fecha</button>
     <mat-form-field class="full-width" appearance="fill">
-      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [(ngModel)]="newPostInfo.publishDate">
+      <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [(ngModel)]="newPostInfo.publishDate"  (dateChange)="clearDateSeconds()">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #picker [showSpinners]="true" [stepHour]="1" [stepMinute]="1" [touchUi]="true">
       </ngx-mat-datetime-picker>

@@ -74,14 +74,36 @@ export class CreatePostComponent {
   }
 
   addFonts() {
-    var font = Quill.import('attributors/style/font');
-    const size = Quill.import('attributors/style/size');
+    var DirectionAttribute = Quill.import('attributors/attribute/direction');
+    var AlignClass = Quill.import('attributors/class/align');
+    var BackgroundClass = Quill.import('attributors/class/background');
+    var ColorClass = Quill.import('attributors/class/color');
+    var DirectionClass = Quill.import('attributors/class/direction');
+    var FontClass = Quill.import('attributors/class/font');
+    var SizeClass = Quill.import('attributors/class/size');
+    var AlignStyle = Quill.import('attributors/style/align');
+    var BackgroundStyle = Quill.import('attributors/style/background');
+    var ColorStyle = Quill.import('attributors/style/color');
+    var DirectionStyle = Quill.import('attributors/style/direction');
+    var FontStyle = Quill.import('attributors/style/font');
+    var SizeStyle = Quill.import('attributors/style/size');
 
-    font.whitelist = this.fonts
-    size.whitelist = this.fontSizes;
-
-    Quill.register(font, true)
-    Quill.register(size, true);
+    FontStyle.whitelist = this.fonts
+    SizeStyle.whitelist = this.fontSizes;
+    
+    Quill.register(DirectionAttribute, true);
+    Quill.register(AlignClass, true);
+    Quill.register(BackgroundClass, true);
+    Quill.register(ColorClass, true);
+    Quill.register(DirectionClass, true);
+    Quill.register(FontClass, true);
+    Quill.register(SizeClass, true);
+    Quill.register(AlignStyle, true);
+    Quill.register(BackgroundStyle, true);
+    Quill.register(ColorStyle, true);
+    Quill.register(DirectionStyle, true);
+    Quill.register(FontStyle, true);
+    Quill.register(SizeStyle, true);
   }
 
   createQuillModules() {
@@ -195,6 +217,7 @@ export class CreatePostComponent {
 
   createPost() {
     this.loading = true;
+    console.log(this.newPostInfo.publishDate)
     this.postService.createPost(this.newPostInfo).subscribe(
       (general: General) => {
         this.loading = false;
@@ -219,5 +242,11 @@ export class CreatePostComponent {
         this.loading = false;
         this.dialogService.showErrorMessage(error);
       });
+  }
+
+  clearDateSeconds()
+  {    
+    this.newPostInfo.publishDate = new Date(this.newPostInfo.publishDate);
+    this.newPostInfo.publishDate.setSeconds(0,0);
   }
 }

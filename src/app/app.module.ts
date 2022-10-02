@@ -11,7 +11,7 @@ import { DomSecurePipe } from './@core/pipes/dom-secure.pipe';
 import { SidebarModule } from './@core/components/sidebar/sidebar.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateCustomModule } from './@core/modules/translate-custom.module';
 import { AuthGuardService } from './@core/services/auth/auth-guard.service';
 import { AuthService } from './@core/services/auth/auth.service';
@@ -29,6 +29,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import localeES from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { DateInterceptor } from './@core/interceptor/date.interceptor';
 registerLocaleData(localeES, 'es')
 
 const COMPONENTS = [
@@ -69,7 +70,8 @@ const PIPES = [
     TranslateCustomModule.forRoot(['es', 'en', 'eu'], 'es')
   ],
   exports: [TranslateCustomModule, ReactiveFormsModule],
-  providers: [AuthGuardService, AuthService, {provide: LOCALE_ID, useValue: 'es'}],
+  providers: [AuthGuardService, AuthService, {provide: LOCALE_ID, useValue: 'es'}, 
+  { provide: HTTP_INTERCEPTORS, useClass: DateInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
